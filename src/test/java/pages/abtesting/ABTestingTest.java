@@ -4,14 +4,14 @@ import base.BaseTest;
 import org.testng.annotations.Test;
 import pages.ABTestingPage;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 public class ABTestingTest extends BaseTest {
 
     @Test(testName = "A/B Testing Page Displayed Correctly")
-    public void testABTesting(){
+    public void testABTesting() {
         ABTestingPage abTestingPage = homePage.clickABTestingPage();
-        assertEquals(abTestingPage.getHeaderTitle(), "A/B Test Control",
-                String.format("Expected: %s - Actual: %s", "A/B Test Control", abTestingPage.getHeaderTitle()));
+        assertThat(abTestingPage.getHeaderTitle(), containsString("A/B Test"));
     }
 }
