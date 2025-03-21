@@ -15,12 +15,12 @@ public class BaseTest {
 
     @BeforeClass
     public void setUp() {
+        System.out.println("Opening Browser");
         driver = new ChromeDriver();
     }
 
     @BeforeMethod
     public void loadHomePage() {
-        System.out.println("Opening Browser");
         driver.get("https://the-internet.herokuapp.com/");
         homePage = new HomePage(driver);
     }

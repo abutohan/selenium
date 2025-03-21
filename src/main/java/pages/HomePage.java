@@ -3,7 +3,6 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
@@ -12,12 +11,17 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    private void clickAnchorLink(String anchorLink){
+    private void clickAnchorLink(String anchorLink) {
         getWait().until(ExpectedConditions.visibilityOfElementLocated(By.linkText(anchorLink))).click();
     }
 
-    public ABTestingPage clickABTestingPage(){
+    public ABTestingPage clickABTestingPage() {
         clickAnchorLink("A/B Testing");
         return new ABTestingPage(getDriver());
+    }
+
+    public AddRemoveElementsPage clickAddRemoveElementsPage() {
+        clickAnchorLink("Add/Remove Elements");
+        return new AddRemoveElementsPage(getDriver());
     }
 }
