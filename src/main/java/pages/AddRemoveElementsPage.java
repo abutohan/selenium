@@ -39,12 +39,11 @@ public class AddRemoveElementsPage extends BasePage {
     }
     
     public int getAddedElementsCount() {
-//        getWait().until(ExpectedConditions.visibilityOfElementLocated(btnAddedElementLoc));
         List<WebElement> btnAddElements = getDriver().findElements(btnAddedElementLoc);
         return btnAddElements.size();
     }
 
-    public void clickBtnDeleteElement(int n) {
+    public void clickBtnDeleteElement() {
         getWait().until(ExpectedConditions.visibilityOfElementLocated(btnAddedElementLoc));
         List<WebElement> btnAddElements = getDriver().findElements(btnAddedElementLoc);
         for(WebElement element: btnAddElements){
