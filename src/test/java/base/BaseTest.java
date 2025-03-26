@@ -7,11 +7,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.HomePage;
 
+import static utils.Constants.BASE_URL;
+
 
 public class BaseTest {
 
     protected HomePage homePage;
-    private WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeClass
     public void setUp() {
@@ -21,7 +23,7 @@ public class BaseTest {
 
     @BeforeMethod
     public void loadHomePage() {
-        driver.get("https://the-internet.herokuapp.com/");
+        driver.get(BASE_URL);
         homePage = new HomePage(driver);
     }
 
