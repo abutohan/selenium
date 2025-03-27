@@ -24,4 +24,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Add/Remove Elements");
         return new AddRemoveElementsPage(getDriver());
     }
+
+    public BrokenImagesPage clickBrokenImagesPage() {
+        clickAnchorLink("Broken Images");
+        return new BrokenImagesPage(getDriver());
+    }
 }
