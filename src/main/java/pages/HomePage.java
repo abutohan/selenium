@@ -29,4 +29,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Broken Images");
         return new BrokenImagesPage(getDriver());
     }
+
+    public CheckboxesPage clickCheckboxesPage() {
+        clickAnchorLink("Checkboxes");
+        return new CheckboxesPage(getDriver());
+    }
 }
