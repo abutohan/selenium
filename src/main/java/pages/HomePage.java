@@ -34,4 +34,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Checkboxes");
         return new CheckboxesPage(getDriver());
     }
+
+    public ContextMenuPage clickContextMenuPage(){
+        clickAnchorLink("Context Menu");
+        return new ContextMenuPage(getDriver());
+    }
 }
