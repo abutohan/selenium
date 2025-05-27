@@ -1,0 +1,18 @@
+[
+  {
+    "checkbox_1": false,
+    "checkbox_2": false
+  },
+  {
+    "checkbox_1": false,
+    "checkbox_2": true
+  },
+  {
+    "checkbox_1": true,
+    "checkbox_2": false
+  },
+  {
+    "checkbox_1": true,
+    "checkbox_2": true
+  }
+]
