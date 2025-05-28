@@ -35,8 +35,13 @@ public class HomePage extends BasePage {
         return new CheckboxesPage(getDriver());
     }
 
-    public ContextMenuPage clickContextMenuPage(){
+    public ContextMenuPage clickContextMenuPage() {
         clickAnchorLink("Context Menu");
         return new ContextMenuPage(getDriver());
+    }
+
+    public DigestAuthenticationPage clickDigestAuthPage() {
+        clickAnchorLink("Digest Authentication");
+        return new DigestAuthenticationPage(getDriver());
     }
 }
