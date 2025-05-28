@@ -44,4 +44,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Digest Authentication");
         return new DigestAuthenticationPage(getDriver());
     }
+
+    public DisappearingElementsPage clickDisappearingElementsPage(){
+        clickAnchorLink("Disappearing Elements");
+        return new DisappearingElementsPage(getDriver());
+    }
 }
