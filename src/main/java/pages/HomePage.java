@@ -49,4 +49,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Disappearing Elements");
         return new DisappearingElementsPage(getDriver());
     }
+
+    public DragAndDropPage clickDragAndDropPage(){
+        clickAnchorLink("Drag and Drop");
+        return new DragAndDropPage(getDriver());
+    }
 }

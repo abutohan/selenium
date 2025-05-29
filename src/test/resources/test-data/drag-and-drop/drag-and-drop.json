@@ -1,0 +1,12 @@
+[
+  {
+    "scenario": "scenario 1",
+    "box_element_1": "B",
+    "box_element_2": "A"
+  },
+  {
+    "scenario": "scenario 2",
+    "box_element_1": "B",
+    "box_element_2": "A"
+  }
+]
