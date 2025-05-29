@@ -54,4 +54,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Drag and Drop");
         return new DragAndDropPage(getDriver());
     }
+
+    public DropdownPage clickDropdownListPage(){
+        clickAnchorLink("Dropdown");
+        return new DropdownPage(getDriver());
+    }
 }
