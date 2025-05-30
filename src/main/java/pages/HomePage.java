@@ -69,4 +69,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Dynamic Loading");
         return new DynamicLoadingPage(getDriver());
     }
+
+    public EntryAdPage clickEntryAdPage(){
+        clickAnchorLink("Entry Ad");
+        return new EntryAdPage(getDriver());
+    }
 }
