@@ -59,4 +59,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Dropdown");
         return new DropdownPage(getDriver());
     }
+
+    public DynamicControlsPage clickDynamicControlsPage(){
+        clickAnchorLink("Dynamic Controls");
+        return new DynamicControlsPage(getDriver());
+    }
 }
