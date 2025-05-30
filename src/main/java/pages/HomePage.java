@@ -64,4 +64,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Dynamic Controls");
         return new DynamicControlsPage(getDriver());
     }
+
+    public DynamicLoadingPage clickDynamicLoadingPage(){
+        clickAnchorLink("Dynamic Loading");
+        return new DynamicLoadingPage(getDriver());
+    }
 }
