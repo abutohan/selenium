@@ -11,7 +11,13 @@ import pages.HomePage;
 import utils.CustomEventListener;
 import utils.WindowManager;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
+
 import static utils.Constants.BASE_URL;
+import static utils.ReadProperties.loadProperty;
 
 
 public class BaseTest {
@@ -20,7 +26,7 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+    public void setUp() throws IOException {
         WebDriver originalDriver = new ChromeDriver(getChromeOptions());
         System.out.println("Opening Browser");
         CustomEventListener customEventListener = new CustomEventListener();
@@ -45,9 +51,21 @@ public class BaseTest {
         return new WindowManager(driver);
     }
 
-    private ChromeOptions getChromeOptions() {
+    private ChromeOptions getChromeOptions() throws IOException {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--incognito");
+
+        //prefs
+        Map<String, Object> prefs = new HashMap<>();
+        String downloadPath = Paths.get(loadProperty().getProperty("download-dir")).toAbsolutePath().toString();
+        prefs.put("download.default_directory", downloadPath);
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("download.directory_upgrade", true);
+        prefs.put("safebrowsing.enabled", true);
+
+        //options
+        //options.addArguments("--incognito");
+        options.setExperimentalOption("prefs", prefs);
+
         return options;
     }
 }

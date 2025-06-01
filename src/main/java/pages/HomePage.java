@@ -79,4 +79,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Exit Intent");
         return new ExitIntentPage(getDriver());
     }
+
+    public FileDownloadPage clickFileDownloadPage(){
+        clickAnchorLink("File Download");
+        return new FileDownloadPage(getDriver());
+    }
 }
