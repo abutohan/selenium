@@ -1,0 +1,14 @@
+[
+  {
+    "directory": "src/test/resources/downloads",
+    "file_name": "91231.jpg"
+  },
+  {
+    "directory": "src/test/resources/downloads",
+    "file_name": "text.txt"
+  },
+  {
+    "directory": "src/test/resources/downloads",
+    "file_name": "10mb.pdf"
+  }
+]

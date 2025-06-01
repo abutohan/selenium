@@ -84,4 +84,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("File Download");
         return new FileDownloadPage(getDriver());
     }
+
+    public FileUploadPage clickFileUploadPage(){
+        clickAnchorLink("File Upload");
+        return new FileUploadPage(getDriver());
+    }
 }
