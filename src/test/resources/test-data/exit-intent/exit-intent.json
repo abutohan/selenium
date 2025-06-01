@@ -1,0 +1,12 @@
+[
+  {
+    "xPos": 10,
+    "yPos": 10,
+    "modal_presence": true
+  },
+  {
+    "xPos": 100,
+    "yPos": 100,
+    "modal_presence": false
+  }
+]
