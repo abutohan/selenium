@@ -26,6 +26,7 @@ public class BaseTest {
         CustomEventListener customEventListener = new CustomEventListener();
         EventFiringDecorator<WebDriver> eventFiringDecorator = new EventFiringDecorator<>(customEventListener);
         driver = eventFiringDecorator.decorate(originalDriver);
+        driver.manage().window().maximize();
     }
 
     @BeforeMethod

@@ -74,4 +74,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Entry Ad");
         return new EntryAdPage(getDriver());
     }
+
+    public ExitIntentPage clickExitIntentPage(){
+        clickAnchorLink("Exit Intent");
+        return new ExitIntentPage(getDriver());
+    }
 }
