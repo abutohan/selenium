@@ -57,10 +57,13 @@ public class BaseTest {
         //prefs
         Map<String, Object> prefs = new HashMap<>();
         String downloadPath = Paths.get(loadProperty().getProperty("download-dir")).toAbsolutePath().toString();
+        //download prefs
         prefs.put("download.default_directory", downloadPath);
         prefs.put("download.prompt_for_download", false);
         prefs.put("download.directory_upgrade", true);
         prefs.put("safebrowsing.enabled", true);
+        //change-password prefs
+        prefs.put("profile.password_manager_leak_detection", false);
 
         //options
         //options.addArguments("--incognito");

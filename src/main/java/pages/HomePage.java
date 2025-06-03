@@ -99,4 +99,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Forgot Password");
         return new ForgotPasswordPage(getDriver());
     }
+
+    public FormAuthenticationPage clickFormAuthenticationPage(){
+        clickAnchorLink("Form Authentication");
+        return new FormAuthenticationPage(getDriver());
+    }
 }
