@@ -94,4 +94,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Floating Menu");
         return new FloatingMenuPage(getDriver());
     }
+
+    public ForgotPasswordPage clickForgotPasswordPage(){
+        clickAnchorLink("Forgot Password");
+        return new ForgotPasswordPage(getDriver());
+    }
 }
