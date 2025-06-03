@@ -89,4 +89,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("File Upload");
         return new FileUploadPage(getDriver());
     }
+
+    public FloatingMenuPage clickFloatingMenuPage(){
+        clickAnchorLink("Floating Menu");
+        return new FloatingMenuPage(getDriver());
+    }
 }
