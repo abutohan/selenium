@@ -104,4 +104,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Form Authentication");
         return new FormAuthenticationPage(getDriver());
     }
+
+    public FramesPage clickFramesPage(){
+        clickAnchorLink("Frames");
+        return new FramesPage(getDriver());
+    }
 }

@@ -1,0 +1,22 @@
+[
+  {
+    "parentFrame": "frame-top",
+    "childFrame": "frame-left",
+    "text": "LEFT"
+  },
+  {
+    "parentFrame": "frame-top",
+    "childFrame": "frame-middle",
+    "text": "MIDDLE"
+  },
+  {
+    "parentFrame": "frame-top",
+    "childFrame": "frame-right",
+    "text": "RIGHT"
+  },
+  {
+    "parentFrame": "frame-bottom",
+    "childFrame": "N/A",
+    "text": "BOTTOM"
+  }
+]
