@@ -1,0 +1,17 @@
+[
+  {
+    "index": 1,
+    "name": "user1",
+    "link": "users/1"
+  },
+  {
+    "index": 2,
+    "name": "user2",
+    "link": "users/2"
+  },
+  {
+    "index": 3,
+    "name": "user3",
+    "link": "users/3"
+  }
+]
