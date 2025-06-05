@@ -119,4 +119,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Hovers");
         return new HoversPage(getDriver());
     }
+
+    public InfiniteScrollPage clickInfiniteScrollPage(){
+        clickAnchorLink("Infinite Scroll");
+        return new InfiniteScrollPage(getDriver());
+    }
 }
