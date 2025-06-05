@@ -114,4 +114,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Horizontal Slider");
         return new HorizontalSliderPage(getDriver());
     }
+
+    public HoversPage clicHoversPage(){
+        clickAnchorLink("Hovers");
+        return new HoversPage(getDriver());
+    }
 }
