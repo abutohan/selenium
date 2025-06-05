@@ -109,4 +109,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Frames");
         return new FramesPage(getDriver());
     }
+
+    public HorizontalSliderPage clickHorizontalSliderPage(){
+        clickAnchorLink("Horizontal Slider");
+        return new HorizontalSliderPage(getDriver());
+    }
 }
