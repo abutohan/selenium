@@ -130,4 +130,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Inputs");
         return new InputsPage(getDriver());
     }
+
+    public JavaScriptAlertsPage clickJavaScriptAlertsPage(){
+        clickAnchorLink("JavaScript Alerts");
+        return new JavaScriptAlertsPage(getDriver());
+    }
 }
