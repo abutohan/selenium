@@ -17,12 +17,12 @@ public class BasicAuthTest extends BaseTest {
     private BasicAuthPage basicAuthPage;
 
     @BeforeMethod
-    public void initPage(){
+    public void initPage() {
         basicAuthPage = new BasicAuthPage(driver);
     }
 
     @Test(testName = "Page Displayed Correctly", dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData){
+    public void testHeaderTitle(JSONObject testData) {
         assertEquals(basicAuthPage.getHeaderTitle(testData.getString("username"), testData.getString("password")), testData.getString("header_title"),
                 String.format("Expected: %s - Actual: %s", testData.getString("header_title"),
                         basicAuthPage.getHeaderTitle(testData.getString("username"), testData.getString("password"))));

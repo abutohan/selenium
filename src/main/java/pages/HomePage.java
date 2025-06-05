@@ -3,6 +3,7 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.bidi.module.Input;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
@@ -123,5 +124,10 @@ public class HomePage extends BasePage {
     public InfiniteScrollPage clickInfiniteScrollPage(){
         clickAnchorLink("Infinite Scroll");
         return new InfiniteScrollPage(getDriver());
+    }
+
+    public InputsPage clickInputsPage(){
+        clickAnchorLink("Inputs");
+        return new InputsPage(getDriver());
     }
 }
