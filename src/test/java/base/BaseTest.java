@@ -3,6 +3,8 @@ package base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.logging.LogType;
+import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 import static utils.Constants.BASE_URL;
 import static utils.ReadProperties.loadProperty;
@@ -57,6 +60,8 @@ public class BaseTest {
         //prefs
         Map<String, Object> prefs = new HashMap<>();
         String downloadPath = Paths.get(loadProperty().getProperty("download-dir")).toAbsolutePath().toString();
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.BROWSER, Level.ALL);
         //download prefs
         prefs.put("download.default_directory", downloadPath);
         prefs.put("download.prompt_for_download", false);
@@ -67,6 +72,7 @@ public class BaseTest {
 
         //options
         //options.addArguments("--incognito");
+        options.setCapability("goog:loggingPrefs", logPrefs);
         options.setExperimentalOption("prefs", prefs);
 
         return options;

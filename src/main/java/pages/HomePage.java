@@ -135,4 +135,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("JavaScript Alerts");
         return new JavaScriptAlertsPage(getDriver());
     }
+
+    public JavaScriptOnLoadEventErrorPage clickJavaScriptOnLoadEventErrorPage(){
+        clickAnchorLink("JavaScript onload event error");
+        return new JavaScriptOnLoadEventErrorPage(getDriver());
+    }
 }
