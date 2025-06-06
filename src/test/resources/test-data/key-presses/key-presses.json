@@ -1,0 +1,14 @@
+[
+  {
+    "key_press_1": "UP",
+    "key_press_2": "DOWN",
+    "key_press_3": "LEFT",
+    "key_press_4": "RIGHT"
+  },
+  {
+    "key_press_1": "ALT",
+    "key_press_2": "CONTROL",
+    "key_press_3": "ESCAPE",
+    "key_press_4": "TAB"
+  }
+]
