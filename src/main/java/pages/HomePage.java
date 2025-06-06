@@ -145,4 +145,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Key Presses");
         return new KeyPressesPage(getDriver());
     }
+
+    public LargeAndDeepDOMPage clickLargeAndDeepDOMPage(){
+        clickAnchorLink("Large & Deep DOM");
+        return new LargeAndDeepDOMPage(getDriver());
+    }
 }
