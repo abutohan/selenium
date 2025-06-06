@@ -140,4 +140,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("JavaScript onload event error");
         return new JavaScriptOnLoadEventErrorPage(getDriver());
     }
+
+    public KeyPressesPage clickKeyPressesPage(){
+        clickAnchorLink("Key Presses");
+        return new KeyPressesPage(getDriver());
+    }
 }
