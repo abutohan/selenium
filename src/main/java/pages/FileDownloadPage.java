@@ -38,7 +38,7 @@ public class FileDownloadPage extends BasePage {
         //get absolute path
         String downloadPath = DownloadsUtil.absoluteDownloadPath(downloadDir);
 
-        DownloadsUtil.clearDownloadDirectory(downloadPath);
+//        DownloadsUtil.clearDownloadDirectory(downloadPath);
 
         for (WebElement el : downloadLinks) {
 
