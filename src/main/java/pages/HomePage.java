@@ -150,4 +150,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Large & Deep DOM");
         return new LargeAndDeepDOMPage(getDriver());
     }
+
+    public MultipleWindowsPage clickMultipleWindowsPage(){
+        clickAnchorLink("Multiple Windows");
+        return new MultipleWindowsPage(getDriver());
+    }
 }
