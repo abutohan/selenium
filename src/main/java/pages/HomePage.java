@@ -169,4 +169,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Secure File Download");
         return new SecureFileDownloadPage(getDriver());
     }
+
+    public StatusCodesPage clickStatusCodesPage(){
+        clickAnchorLink("Status Codes");
+        return new StatusCodesPage(getDriver());
+    }
 }
