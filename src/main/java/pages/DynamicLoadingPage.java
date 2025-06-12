@@ -28,16 +28,16 @@ public class DynamicLoadingPage extends BasePage {
     }
 
     public String getHeaderTitle(){
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public DynamicLoadingExample1Page exampleOne() {
-        getWait().until(ExpectedConditions.visibilityOf(linkExample1)).click();
+        linkExample1.click();
         return new DynamicLoadingExample1Page(getDriver());
     }
 
     public DynamicLoadingExample2Page exampleTwo() {
-        getWait().until(ExpectedConditions.visibilityOf(linkExample2)).click();
+        linkExample2.click();
         return new DynamicLoadingExample2Page(getDriver());
     }
 

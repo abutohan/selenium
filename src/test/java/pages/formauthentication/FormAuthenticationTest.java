@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class FormAuthenticationTest extends BaseTest {
@@ -23,30 +24,35 @@ public class FormAuthenticationTest extends BaseTest {
         formAuthenticationPage = homePage.clickFormAuthenticationPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData) throws IOException {
-        assertEquals(formAuthenticationPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), formAuthenticationPage.getHeaderTitle()));
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String actualHeaderTitle = formAuthenticationPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Login", priority = 1, dataProvider = "getUserCredentials")
-    public void testLogin(JSONObject testData) throws IOException {
-        formAuthenticationPage.setUsername(testData.getString("username"));
-        formAuthenticationPage.setPassword(testData.getString("password"));
+    @Test(testName = "Login", priority = 1, dataProvider = "getUserCredentialsDetails")
+    public void testLogin(JSONObject testData) {
+        String username = testData.getString("username");
+        String password = testData.getString("password");
+        formAuthenticationPage.setUsername(username);
+        formAuthenticationPage.setPassword(password);
         SecureAreaPage secureAreaPage = formAuthenticationPage.clickLoginButton();
-
-        assertTrue(secureAreaPage.getAlertText().contains(testData.getString("message")),
-                String.format("Expected: %s - Actual: %s", testData.getString("message"), secureAreaPage.getAlertText()));
+        String actualAlertMessage = secureAreaPage.getAlertText();
+        String expectedAlertMessage = testData.getString("message");
+        assertTrue(actualAlertMessage.contains(expectedAlertMessage),
+                onFailure(expectedAlertMessage, actualAlertMessage));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.form-authentication.header");
     }
 
-    @DataProvider(name = "getUserCredentials")
-    public Object[][] getUserCredentials() throws IOException {
-        return getTestDataFromJSON("test-data.form-authentication.form-authentication");
+    @DataProvider(name = "getUserCredentialsDetails")
+    private Object[][] getUserCredentialsDetails() throws IOException {
+        return getTestDataFromJSON("test-data.form-authentication.users");
     }
 
 }

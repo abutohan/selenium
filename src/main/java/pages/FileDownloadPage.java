@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static utils.Constants.DOWNLOAD_TIMEOUT;
+import static utils.DownloadsUtil.waitForDownloadCompletion;
+
 public class FileDownloadPage extends BasePage {
 
     @FindBy(tagName = "h3")
@@ -29,7 +32,7 @@ public class FileDownloadPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void downloadFiles(String downloadDir) throws IOException, InterruptedException {
@@ -38,7 +41,8 @@ public class FileDownloadPage extends BasePage {
         //get absolute path
         String downloadPath = DownloadsUtil.absoluteDownloadPath(downloadDir);
 
-//        DownloadsUtil.clearDownloadDirectory(downloadPath);
+        //clear download directory
+        //clearDownloadDirectory(downloadPath);
 
         for (WebElement el : downloadLinks) {
 
@@ -46,7 +50,7 @@ public class FileDownloadPage extends BasePage {
 
             String fileName = el.getText();
 
-            boolean fileDownloaded = DownloadsUtil.waitForDownloadCompletion(fileName, downloadPath, 60);
+            boolean fileDownloaded = waitForDownloadCompletion(fileName, downloadPath, DOWNLOAD_TIMEOUT);
 
             if (fileDownloaded) {
                 System.out.println("File downloaded successfully to: " + new File(downloadPath, fileName).getAbsolutePath());
@@ -55,4 +59,5 @@ public class FileDownloadPage extends BasePage {
             }
         }
     }
+
 }

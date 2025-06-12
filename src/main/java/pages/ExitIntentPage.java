@@ -29,7 +29,7 @@ public class ExitIntentPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
 
@@ -40,10 +40,6 @@ public class ExitIntentPage extends BasePage {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public void clickCloseModal() {
-        getWait().until(ExpectedConditions.visibilityOf(closeModal)).click();
     }
 
     public void moveMousePosition(int xPos, int yPos) throws AWTException {

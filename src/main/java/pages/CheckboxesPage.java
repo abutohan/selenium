@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,7 @@ public class CheckboxesPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void resetCheckboxes() {
@@ -39,17 +38,16 @@ public class CheckboxesPage extends BasePage {
     public void tickCheckboxes(HashMap<Integer, Boolean> checkboxConfig) {
         resetCheckboxes();
         for (int i = 0; i < checkboxes.size(); i++) {
-            if (checkboxConfig.get(i)) {
-                checkboxes.get(i).click();
-            }
+            if (checkboxConfig.get(i)) checkboxes.get(i).click();
         }
     }
 
     public List<WebElement> getCheckboxes() {
-        return getWait().until(ExpectedConditions.visibilityOfAllElements(checkboxes));
+        return checkboxes;
     }
 
     public int getCheckboxCount() {
-        return getWait().until(ExpectedConditions.visibilityOfAllElements(checkboxes)).size();
+        return checkboxes.size();
     }
+    
 }

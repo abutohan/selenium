@@ -24,7 +24,7 @@ public class InfiniteScrollPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public int getNumberOfParagraphsPresent() {
@@ -39,4 +39,5 @@ public class InfiniteScrollPage extends BasePage {
             jsExecutor.executeScript(script);
         }
     }
+
 }

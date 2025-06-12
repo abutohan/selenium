@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class HoversTest extends BaseTest {
@@ -22,27 +23,32 @@ public class HoversTest extends BaseTest {
         hoversPage = homePage.clicHoversPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData) throws IOException {
-        assertEquals(hoversPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), hoversPage.getHeaderTitle()));
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String actualHeaderTitle = hoversPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Hover User", priority = 2, dataProvider = "getUsersDetails")
+    @Test(testName = "Hover User", priority = 2, dataProvider = "getUsersData")
     public void testHoverUser(JSONObject testData) {
-        HoversPage.FigureCaption caption = hoversPage.hoverOverFigure(testData.getInt("index"));
+        int index = testData.getInt("index");
+        HoversPage.FigureCaption caption = hoversPage.hoverOverFigure(index);
         assertTrue(caption.isCaptionDisplayed(), "Caption not displayed");
-        assertTrue(caption.getTitle().contains(testData.getString("name")), "Caption title incorrect");
-        assertTrue(caption.getLink().endsWith(testData.getString("link")), "Link incorrect");
+        String name = testData.getString("name");
+        String link = testData.getString("link");
+        assertTrue(caption.getTitle().contains(name), "Caption title incorrect");
+        assertTrue(caption.getLink().endsWith(link), "Link incorrect");
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.hovers.header");
     }
 
-    @DataProvider(name = "getUsersDetails")
-    public Object[][] getUsersDetails() throws IOException {
+    @DataProvider(name = "getUsersData")
+    private Object[][] getUsersData() throws IOException {
         return getTestDataFromJSON("test-data.hovers.hovers");
     }
 

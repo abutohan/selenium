@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ForgotPasswordPage extends BasePage {
 
@@ -28,15 +27,15 @@ public class ForgotPasswordPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void enterEmail(String email) {
-        getWait().until(ExpectedConditions.visibilityOf(emailField)).sendKeys(email);
+        emailField.sendKeys(email);
     }
 
     public EmailSentPage clickRetrievePassword() {
-        getWait().until(ExpectedConditions.elementToBeClickable(retrievePasswordButton)).click();
+        retrievePasswordButton.click();
         return new EmailSentPage(getDriver());
     }
 
@@ -44,4 +43,5 @@ public class ForgotPasswordPage extends BasePage {
         enterEmail(email);
         return clickRetrievePassword();
     }
+
 }

@@ -12,6 +12,7 @@ import pages.DynamicLoadingPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class DynamicLoadingTest extends BaseTest {
@@ -23,41 +24,47 @@ public class DynamicLoadingTest extends BaseTest {
         dynamicLoadingPage = homePage.clickDynamicLoadingPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(dynamicLoadingPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), dynamicLoadingPage.getHeaderTitle()));
+        String actualHeaderTitle = dynamicLoadingPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Example Page 1", priority = 2, dataProvider = "getExampleOneMessage")
+    @Test(testName = "Example Page 1", priority = 2, dataProvider = "getExampleOneMessageData")
     public void testDynamicLoadingExampleOne(JSONObject testData) {
         DynamicLoadingExample1Page dynamicLoadingExample1PagePage = dynamicLoadingPage.exampleOne();
         dynamicLoadingExample1PagePage.clickStart();
-        assertEquals(dynamicLoadingExample1PagePage.getLoadedText(), testData.getString("message"),
-                String.format("Expected: %s - Actual: %s", testData.getString("message"), dynamicLoadingExample1PagePage.getLoadedText()));
+        String actualMessage = dynamicLoadingExample1PagePage.getLoadedText();
+        String expectedMessage = testData.getString("message");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
     }
 
-    @Test(testName = "Example Page 2", priority = 3, dataProvider = "getExampleTwoMessage")
+    @Test(testName = "Example Page 2", priority = 3, dataProvider = "getExampleTwoMessageData")
     public void testDynamicLoadingExampleTwo(JSONObject testData) {
         DynamicLoadingExample2Page dynamicLoadingExample2PagePage = dynamicLoadingPage.exampleTwo();
         dynamicLoadingExample2PagePage.clickStart();
-        assertEquals(dynamicLoadingExample2PagePage.getLoadedText(), testData.getString("message"),
-                String.format("Expected: %s - Actual: %s", testData.getString("message"), dynamicLoadingExample2PagePage.getLoadedText()));
+        String actualMessage = dynamicLoadingExample2PagePage.getLoadedText();
+        String expectedMessage = testData.getString("message");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.dynamic-loading.header");
     }
 
-    @DataProvider(name = "getExampleOneMessage")
-    public Object[][] getExampleOneMessage() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-loading.dynamic-loading-example-one");
+    @DataProvider(name = "getExampleOneMessageData")
+    private Object[][] getExampleOneMessageData() throws IOException {
+        return getTestDataFromJSON("test-data.dynamic-loading.example-one");
     }
 
-    @DataProvider(name = "getExampleTwoMessage")
-    public Object[][] getExampleTwoMessage() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-loading.dynamic-loading-example-two");
+    @DataProvider(name = "getExampleTwoMessageData")
+    private Object[][] getExampleTwoMessageData() throws IOException {
+        return getTestDataFromJSON("test-data.dynamic-loading.example-two");
     }
 
 }

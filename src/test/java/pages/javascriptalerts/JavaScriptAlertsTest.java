@@ -10,6 +10,7 @@ import pages.JavaScriptAlertsPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class JavaScriptAlertsTest extends BaseTest {
@@ -21,10 +22,12 @@ public class JavaScriptAlertsTest extends BaseTest {
         javaScriptAlertsPage = homePage.clickJavaScriptAlertsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(javaScriptAlertsPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), javaScriptAlertsPage.getHeaderTitle()));
+        String actualHeaderTitle = javaScriptAlertsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @Test(testName = "JavaScript Alert", priority = 2, dataProvider = "javaScriptAlertData")
@@ -33,12 +36,13 @@ public class JavaScriptAlertsTest extends BaseTest {
         String actualMessage = javaScriptAlertsPage.getAlertText();
         javaScriptAlertsPage.clickAcceptAlert();
         String actualResult = javaScriptAlertsPage.getResultText();
-        assertEquals(actualMessage, testData.getString("alert_message"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("alert_message"), actualMessage));
-        assertEquals(actualResult, testData.getString("label_text"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("label_text"), actualResult));
+        String expectedResult = testData.getString("label_text");
+        String expectedMessage = testData.getString("alert_message");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
+        assertEquals(actualResult, expectedResult,
+                onFailure(expectedResult, actualResult));
     }
-
 
     @Test(testName = "JavaScript Alert Confirm OK", priority = 3, dataProvider = "javaScriptConfirmOKData")
     public void testJavaScriptAlertConfirmOK(JSONObject testData) {
@@ -46,10 +50,12 @@ public class JavaScriptAlertsTest extends BaseTest {
         String actualMessage = javaScriptAlertsPage.getAlertText();
         javaScriptAlertsPage.clickAcceptAlert();
         String actualResult = javaScriptAlertsPage.getResultText();
-        assertEquals(actualMessage, testData.getString("alert_message"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("alert_message"), actualMessage));
-        assertEquals(actualResult, testData.getString("label_text"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("label_text"), actualResult));
+        String expectedResult = testData.getString("label_text");
+        String expectedMessage = testData.getString("alert_message");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
+        assertEquals(actualResult, expectedResult,
+                onFailure(expectedResult, actualResult));
     }
 
     @Test(testName = "JavaScript Alert Confirm Cancel", priority = 4, dataProvider = "javaScriptConfirmCancelData")
@@ -58,10 +64,12 @@ public class JavaScriptAlertsTest extends BaseTest {
         String actualMessage = javaScriptAlertsPage.getAlertText();
         javaScriptAlertsPage.clickDismissAlert();
         String actualResult = javaScriptAlertsPage.getResultText();
-        assertEquals(actualMessage, testData.getString("alert_message"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("alert_message"), actualMessage));
-        assertEquals(actualResult, testData.getString("label_text"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("label_text"), actualResult));
+        String expectedResult = testData.getString("label_text");
+        String expectedMessage = testData.getString("alert_message");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
+        assertEquals(actualResult, expectedResult,
+                onFailure(expectedResult, actualResult));
     }
 
     @Test(testName = "JavaScript Alert Text Prompt", priority = 4, dataProvider = "javaScriptAlertTextPromptData")
@@ -71,12 +79,10 @@ public class JavaScriptAlertsTest extends BaseTest {
         javaScriptAlertsPage.setAlertText(actualMessage);
         javaScriptAlertsPage.clickAcceptAlert();
         String actualResult = javaScriptAlertsPage.getResultText();
-
-
-        assertEquals(actualResult, testData.getString("label_text"),
-                String.format("Incorrect result: Expected '%s', but got '%s'", testData.getString("label_text"), actualResult));
+        String expectedMessage = testData.getString("label_text");
+        assertEquals(actualResult, expectedMessage,
+                onFailure(expectedMessage, actualResult));
     }
-
 
     @DataProvider(name = "getHeaderTitle")
     private Object[][] getHeaderTitle() throws IOException {

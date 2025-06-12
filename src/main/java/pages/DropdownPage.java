@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class DropdownPage extends BasePage {
@@ -19,14 +18,13 @@ public class DropdownPage extends BasePage {
     @CacheLookup
     private WebElement dropdownList;
 
-
     public DropdownPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public String selectFromDropDown(String option) {
@@ -35,6 +33,7 @@ public class DropdownPage extends BasePage {
     }
 
     public Select findDropdownElement() {
-        return new Select(getWait().until(ExpectedConditions.visibilityOf(dropdownList)));
+        return new Select(dropdownList);
     }
+
 }

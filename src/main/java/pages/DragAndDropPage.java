@@ -34,12 +34,11 @@ public class DragAndDropPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void dragAndDropElement(WebElement sourceElement, WebElement destinationElement) {
         Actions actions = new Actions(getDriver());
-
         actions.clickAndHold(sourceElement).moveToElement(destinationElement).release().build().perform();
     }
 

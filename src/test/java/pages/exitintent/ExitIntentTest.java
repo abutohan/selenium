@@ -1,6 +1,5 @@
 package pages.exitintent;
 
-import base.BasePage;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +10,8 @@ import pages.ExitIntentPage;
 import java.awt.*;
 import java.io.IOException;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class ExitIntentTest extends BaseTest {
@@ -19,30 +19,35 @@ public class ExitIntentTest extends BaseTest {
     private ExitIntentPage exitIntentPage;
 
     @BeforeMethod
-    public void initPage(){
+    public void initPage() {
         exitIntentPage = homePage.clickExitIntentPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(exitIntentPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), exitIntentPage.getHeaderTitle()));
+        String actualHeaderTitle = exitIntentPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Check Modal Presence", priority = 2, dataProvider = "getModalPresence")
+    @Test(testName = "Check Modal Presence", priority = 2, dataProvider = "getModalPresenceData")
     public void testModalPresence(JSONObject testData) throws AWTException {
         exitIntentPage.moveMousePosition(testData.getInt("xPos"), testData.getInt("yPos"));
-        assertEquals(exitIntentPage.checkModalPresence(), testData.getBoolean("modal_presence"));
+        boolean actualModalPresenceStatus = exitIntentPage.checkModalPresence();
+        boolean expectedModalPresenceStatus = testData.getBoolean("modal_presence");
+        assertEquals(actualModalPresenceStatus, expectedModalPresenceStatus,
+                onFailure(String.valueOf(expectedModalPresenceStatus), String.valueOf(actualModalPresenceStatus)));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.exit-intent.header");
     }
 
-    @DataProvider(name = "getModalPresence")
-    public Object[][] getModalPresence() throws IOException {
-        return getTestDataFromJSON("test-data.exit-intent.exit-intent");
+    @DataProvider(name = "getModalPresenceData")
+    private Object[][] getModalPresenceData() throws IOException {
+        return getTestDataFromJSON("test-data.exit-intent.modal-presence-status");
     }
 
 }

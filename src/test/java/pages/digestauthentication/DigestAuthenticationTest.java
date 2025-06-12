@@ -10,6 +10,7 @@ import pages.DigestAuthenticationPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class DigestAuthenticationTest extends BaseTest {
@@ -17,19 +18,23 @@ public class DigestAuthenticationTest extends BaseTest {
     private DigestAuthenticationPage digestAuthenticationPage;
 
     @BeforeMethod
-    public void initPage(){
+    public void initPage() {
         digestAuthenticationPage = homePage.clickDigestAuthPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData){
-        assertEquals(digestAuthenticationPage.getHeaderTitle(testData.getString("username"), testData.getString("password")), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"),
-                        digestAuthenticationPage.getHeaderTitle(testData.getString("username"), testData.getString("password"))));
+    @Test(testName = "Page is Displayed", dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String username = testData.getString("username");
+        String password = testData.getString("password");
+        String actualHeaderTitle = digestAuthenticationPage.getHeaderTitle(username, password);
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException{
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.digest-authentication.header");
     }
+
 }

@@ -31,7 +31,7 @@ public class EntryAdPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public boolean checkModalPresence() {
@@ -44,11 +44,11 @@ public class EntryAdPage extends BasePage {
     }
 
     public void clickCloseModal() {
-        getWait().until(ExpectedConditions.visibilityOf(closeModal)).click();
+        closeModal.click();
     }
 
     public void clickRestart() {
-        getWait().until(ExpectedConditions.visibilityOf(restart)).click();
+        restart.click();
     }
 
 }

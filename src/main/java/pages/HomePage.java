@@ -26,6 +26,11 @@ public class HomePage extends BasePage {
         return new AddRemoveElementsPage(getDriver());
     }
 
+    public BasicAuthPage clickBasicAuthPage() {
+        clickAnchorLink("Basic Auth");
+        return new BasicAuthPage(getDriver());
+    }
+
     public BrokenImagesPage clickBrokenImagesPage() {
         clickAnchorLink("Broken Images");
         return new BrokenImagesPage(getDriver());

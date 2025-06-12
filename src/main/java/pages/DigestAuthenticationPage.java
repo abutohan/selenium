@@ -23,4 +23,5 @@ public class DigestAuthenticationPage extends BasePage {
         getDriver().get(String.format("%s/digest_auth", BASE_URL));
         return getWait().until(ExpectedConditions.visibilityOfElementLocated(headerTitle)).getText();
     }
+
 }

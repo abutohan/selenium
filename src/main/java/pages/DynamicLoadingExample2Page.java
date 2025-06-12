@@ -24,10 +24,11 @@ public class DynamicLoadingExample2Page extends BasePage {
     }
 
     public void clickStart() {
-        getWait().until(ExpectedConditions.elementToBeClickable(startButton)).click();
+        startButton.click();
     }
 
     public String getLoadedText() {
         return getWait().until(ExpectedConditions.visibilityOf(loadedText)).getText();
     }
+
 }

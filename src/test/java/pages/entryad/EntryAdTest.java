@@ -10,6 +10,7 @@ import pages.EntryAdPage;
 import java.io.IOException;
 
 import static org.testng.Assert.*;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class EntryAdTest extends BaseTest {
@@ -20,14 +21,17 @@ public class EntryAdTest extends BaseTest {
     public void initPage() {
         entryAdPage = homePage.clickEntryAdPage();
     }
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(entryAdPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), entryAdPage.getHeaderTitle()));
+        String actualHeaderTitle = entryAdPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @Test(testName = "Check Modal Presence", priority = 2)
-    public void testModalPresence(){
+    public void testModalPresence() {
         assertTrue(entryAdPage.checkModalPresence());
         entryAdPage.clickCloseModal();
         assertFalse(entryAdPage.checkModalPresence());
@@ -39,9 +43,8 @@ public class EntryAdTest extends BaseTest {
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.entry-ad.header");
     }
-
 
 }

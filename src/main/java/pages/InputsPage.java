@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class InputsPage extends BasePage {
 
@@ -26,15 +25,14 @@ public class InputsPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void setInputBySendingKeys(String text) {
-        getWait().until(ExpectedConditions.visibilityOf(input)).sendKeys(text);
+        input.sendKeys(text);
     }
 
     public void setInputByArrowKeys(int number) {
-        getWait().until(ExpectedConditions.visibilityOf(input));
         boolean value = number >= 0;
         Keys key = value ? Keys.ARROW_UP : Keys.ARROW_DOWN;
 
@@ -46,7 +44,7 @@ public class InputsPage extends BasePage {
     }
 
     public void clearInput() {
-        getWait().until(ExpectedConditions.visibilityOf(input)).clear();
+        input.clear();
     }
 
     public String getInput() {

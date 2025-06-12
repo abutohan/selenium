@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FloatingMenuPage extends BasePage {
 
@@ -14,12 +13,12 @@ public class FloatingMenuPage extends BasePage {
     @CacheLookup
     private WebElement headerTitle;
 
-    public FloatingMenuPage(WebDriver driver){
+    public FloatingMenuPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 }

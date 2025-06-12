@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileUploadPage extends BasePage {
@@ -35,18 +34,17 @@ public class FileUploadPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void uploadFile(String fileDirectory, String fileName) {
-
         String absolutePathOfFile = Paths.get(fileDirectory, fileName).toAbsolutePath().toString();
-
-        getWait().until(ExpectedConditions.visibilityOf(inputField)).sendKeys(absolutePathOfFile);
-        getWait().until(ExpectedConditions.elementToBeClickable(uploadButton)).click();
+        inputField.sendKeys(absolutePathOfFile);
+        uploadButton.click();
     }
 
     public String getUploadedFile() {
         return getWait().until(ExpectedConditions.visibilityOf(uploadedFiles)).getText();
     }
+
 }

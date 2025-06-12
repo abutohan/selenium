@@ -2,6 +2,7 @@ package pages.abtesting;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.ABTestingPage;
@@ -14,9 +15,15 @@ import static utils.ReadJSON.getTestDataFromJSON;
 
 public class ABTestingTest extends BaseTest {
 
-    @Test(testName = "Page Displayed Correctly", dataProvider = "getHeaderTitle")
+    private ABTestingPage abTestingPage;
+
+    @BeforeMethod
+    public void initPage(){
+        abTestingPage = homePage.clickABTestingPage();
+    }
+
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testABTesting(JSONObject testData) {
-        ABTestingPage abTestingPage = homePage.clickABTestingPage();
         assertThat(abTestingPage.getHeaderTitle(), containsString(testData.getString("header_title")));
     }
 
@@ -24,4 +31,5 @@ public class ABTestingTest extends BaseTest {
     private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.ab-testing.header");
     }
+
 }
