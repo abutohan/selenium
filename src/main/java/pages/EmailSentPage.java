@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class EmailSentPage extends BasePage {
     @FindBy(id = "content")
@@ -19,6 +18,6 @@ public class EmailSentPage extends BasePage {
     }
 
     public String getMessage() {
-        return getWait().until(ExpectedConditions.visibilityOf(contentArea)).getText();
+        return contentArea.getText();
     }
 }

@@ -10,6 +10,7 @@ import pages.BrokenImagesPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class BrokenImagesTest extends BaseTest {
@@ -21,25 +22,30 @@ public class BrokenImagesTest extends BaseTest {
         brokenImagesPage = homePage.clickBrokenImagesPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(brokenImagesPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), brokenImagesPage.getHeaderTitle()));
+        String actualHeaderTitle = brokenImagesPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Count Broken Images", priority = 2, dataProvider = "countBrokenImages")
-    public void testCountBrokenImages(JSONObject testData) {
-        assertEquals(brokenImagesPage.countBrokenImages(), testData.getInt("number_of_broken_img"),
-                String.format("Expected: %d - Actual: %d", testData.getInt("number_of_broken_img"), brokenImagesPage.countBrokenImages()));
+    @Test(testName = "All Images Are Loaded", priority = 2, dataProvider = "getImagesLoadedStatusData")
+    public void testAllImageAreLoaded(JSONObject testData) {
+        boolean expectedImagesLoadedStatus = testData.getBoolean("images_loaded_status");
+        boolean actualImagesLoadedStatus = brokenImagesPage.allImageAreLoaded();
+        assertEquals(actualImagesLoadedStatus, expectedImagesLoadedStatus,
+                onFailure(String.valueOf(expectedImagesLoadedStatus), String.valueOf(actualImagesLoadedStatus)));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.broken-images.header");
     }
 
-    @DataProvider(name = "countBrokenImages")
-    public Object[][] countBrokenImages() throws IOException {
-        return getTestDataFromJSON("test-data.broken-images.broken-images");
+    @DataProvider(name = "getImagesLoadedStatusData")
+    private Object[][] getImagesLoadedStatusData() throws IOException {
+        return getTestDataFromJSON("test-data.broken-images.images-loaded-status");
     }
+
 }

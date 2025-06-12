@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ContextMenuPage extends BasePage {
 
@@ -25,7 +24,7 @@ public class ContextMenuPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void rightClickTheBox() {
@@ -40,4 +39,5 @@ public class ContextMenuPage extends BasePage {
     public void acceptPopUp() {
         getDriver().switchTo().alert().accept();
     }
+
 }

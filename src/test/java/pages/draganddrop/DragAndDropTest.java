@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class DragAndDropTest extends BaseTest {
@@ -23,29 +24,34 @@ public class DragAndDropTest extends BaseTest {
         dragAndDropPage = homePage.clickDragAndDropPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(dragAndDropPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), dragAndDropPage.getHeaderTitle()));
+        String actualHeaderTitle = dragAndDropPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Drag and Drop Element", priority = 2, dataProvider = "getBoxHeader")
+    @Test(testName = "Drag and Drop Element", priority = 2, dataProvider = "getBoxHeaderData")
     public void testDragAndDropElement(JSONObject testData) {
         dragAndDropPage.dragAndDrop(testData.getString("scenario"));
 
         List<WebElement> boxes = dragAndDropPage.getBoxHeader();
         for (int i = 0; i < boxes.size(); i++) {
-            assertEquals(boxes.get(i).getText(), testData.getString("box_element_" + (i + 1)));
+            String actualBoxHeader = boxes.get(i).getText();
+            String expectedBoxHeader = testData.getString("box_element_" + (i + 1));
+            assertEquals(actualBoxHeader, expectedBoxHeader,
+                    onFailure(expectedBoxHeader, actualBoxHeader));
         }
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.drag-and-drop.header");
     }
 
-    @DataProvider(name = "getBoxHeader")
-    public Object[][] getBoxHeader() throws IOException {
-        return getTestDataFromJSON("test-data.drag-and-drop.drag-and-drop");
+    @DataProvider(name = "getBoxHeaderData")
+    private Object[][] getBoxHeaderData() throws IOException {
+        return getTestDataFromJSON("test-data.drag-and-drop.box-header");
     }
 }

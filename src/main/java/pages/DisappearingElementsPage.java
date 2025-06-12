@@ -15,21 +15,22 @@ public class DisappearingElementsPage extends BasePage {
     @CacheLookup
     private WebElement headerTitle;
 
-    public DisappearingElementsPage(WebDriver driver){
+    public DisappearingElementsPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public String getHeaderTitle(){
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+    public String getHeaderTitle() {
+        return headerTitle.getText();
     }
 
-    public void chekPresenceOfElementLink(String elementLink){
+    public void chekPresenceOfElementLink(String elementLink) {
         try {
             getWait().until(ExpectedConditions.visibilityOfElementLocated(By.linkText(elementLink)));
             System.out.println(elementLink + " is present");
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(elementLink + " is not present");
         }
     }
+
 }

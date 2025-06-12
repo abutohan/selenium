@@ -38,7 +38,7 @@ public class DownloadsUtil {
      * @return true if the download completes successfully, false otherwise.
      * @throws InterruptedException If the thread is interrupted during waiting.
      */
-    public static boolean waitForDownloadCompletion(String fileName, String downloadPath, int timeoutSeconds) throws InterruptedException, IOException {
+    public static boolean waitForDownloadCompletion(String fileName, String downloadPath, int timeoutSeconds) throws InterruptedException {
 
         File downloadedFile = new File(downloadPath, fileName);
         long startTime = System.currentTimeMillis();

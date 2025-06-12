@@ -10,6 +10,7 @@ import pages.DynamicControlsPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class DynamicControlsTest extends BaseTest {
@@ -21,24 +22,26 @@ public class DynamicControlsTest extends BaseTest {
         dynamicControlsPage = homePage.clickDynamicControlsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(dynamicControlsPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), dynamicControlsPage.getHeaderTitle()));
+        String actualHeaderTitle = dynamicControlsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Messag Can Be Enter", priority = 2, dataProvider = "getMessageToBeEntered")
+    @Test(testName = "Message Can Be Entered", priority = 2, dataProvider = "getMessageToBeEnteredData")
     public void testMessageCanBeEnter(JSONObject testData) {
         dynamicControlsPage.setTextInput(testData.getString("message"));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.dynamic-controls.header");
     }
 
-    @DataProvider(name = "getMessageToBeEntered")
-    public Object[][] getMessageToBeEntered() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-controls.dynamic-controls");
+    @DataProvider(name = "getMessageToBeEnteredData")
+    private Object[][] getMessageToBeEnteredData() throws IOException {
+        return getTestDataFromJSON("test-data.dynamic-controls.messages");
     }
 }

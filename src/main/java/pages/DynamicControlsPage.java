@@ -31,18 +31,19 @@ public class DynamicControlsPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
-    public void setTextInput(String message){
+    public void setTextInput(String message) {
         clickEnableButton();
         getWait().until(ExpectedConditions.textToBePresentInElementLocated(notifLabel, "enabled"));
-        getWait().until(ExpectedConditions.visibilityOf(textInput)).sendKeys(message);
+        textInput.sendKeys(message);
         clickEnableButton();
         getWait().until(ExpectedConditions.textToBePresentInElementLocated(notifLabel, "disabled"));
     }
 
-    private void clickEnableButton(){
-        getWait().until(ExpectedConditions.elementToBeClickable(enableDisableBtn)).click();
+    private void clickEnableButton() {
+        enableDisableBtn.click();
     }
+
 }

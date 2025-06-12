@@ -24,7 +24,7 @@ public class DynamicLoadingExample1Page extends BasePage {
     }
 
     public void clickStart() {
-        getWait().until(ExpectedConditions.elementToBeClickable(startButton)).click();
+        startButton.click();
         /* FLUENT WAIT
         FluentWait wait = new FluentWait(driver)
                 .withTimeout(Duration.ofSeconds(5))
@@ -39,4 +39,5 @@ public class DynamicLoadingExample1Page extends BasePage {
     public String getLoadedText() {
         return getWait().until(ExpectedConditions.visibilityOf(loadedText)).getText();
     }
+
 }

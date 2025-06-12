@@ -11,6 +11,7 @@ import pages.NestedFramesPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class FramesTest extends BaseTest {
@@ -22,26 +23,33 @@ public class FramesTest extends BaseTest {
         framesPage = homePage.clickFramesPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData) throws IOException {
-        assertEquals(framesPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), framesPage.getHeaderTitle()));
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String actualHeaderTitle = framesPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Nested Frames", priority = 2, dataProvider = "getNestedFramesDetails")
+    @Test(testName = "Nested Frames", priority = 2, dataProvider = "getNestedFramesData")
     public void testGoToFrames(JSONObject testData) {
         NestedFramesPage nestedFramesPage = framesPage.clickNestedFrames();
-        assertEquals(nestedFramesPage.getFrameText(testData.getString("parentFrame"), testData.getString("childFrame")), testData.getString("text"));
+        String parentFrame = testData.getString("parentFrame");
+        String childFrame = testData.getString("childFrame");
+        String actualMessage = nestedFramesPage.getFrameText(parentFrame, childFrame);
+        String expectedMessage = testData.getString("text");
+        assertEquals(actualMessage, expectedMessage,
+                onFailure(expectedMessage, actualMessage));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.frames.header");
     }
 
-    @DataProvider(name = "getNestedFramesDetails")
-    public Object[][] getNestedFramesDetails() throws IOException {
-        return getTestDataFromJSON("test-data.frames.frames-nested");
+    @DataProvider(name = "getNestedFramesData")
+    private Object[][] getNestedFramesData() throws IOException {
+        return getTestDataFromJSON("test-data.frames.nested");
     }
 
 }

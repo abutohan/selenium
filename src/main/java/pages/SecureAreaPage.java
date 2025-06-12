@@ -22,4 +22,5 @@ public class SecureAreaPage extends BasePage {
     public String getAlertText() {
         return getWait().until(ExpectedConditions.visibilityOf(statusAlert)).getText();
     }
+
 }

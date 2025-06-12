@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class CheckboxesTest extends BaseTest {
@@ -24,13 +25,15 @@ public class CheckboxesTest extends BaseTest {
         checkboxesPage = homePage.clickCheckboxesPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(checkboxesPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), checkboxesPage.getHeaderTitle()));
+        String actualHeaderTitle = checkboxesPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Tick Checkboxes", priority = 2, dataProvider = "tickCheckboxes")
+    @Test(testName = "Tick Checkboxes", priority = 2, dataProvider = "getCheckboxesData")
     public void testTickCheckboxes(JSONObject testData) {
 
         //get possible count of checkbox
@@ -46,18 +49,21 @@ public class CheckboxesTest extends BaseTest {
         List<WebElement> checkboxes = checkboxesPage.getCheckboxes();
         //get state box state
         for (int i = 0; i < checkboxesCount; i++) {
-            assertEquals(checkboxes.get(i).isSelected(), testData.getBoolean("checkbox_" + (i + 1)),
-                    String.format("Expected: %s - Actual: %s", checkboxes.get(i).isSelected(), testData.getBoolean("checkbox_" + (i + 1))));
+            boolean actualCheckboxStatus = checkboxes.get(i).isSelected();
+            boolean expectedCheckboxStatus = testData.getBoolean("checkbox_" + (i + 1));
+            assertEquals(actualCheckboxStatus, expectedCheckboxStatus,
+                    onFailure(String.valueOf(expectedCheckboxStatus), String.valueOf(actualCheckboxStatus)));
         }
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.checkboxes.header");
     }
 
-    @DataProvider(name = "tickCheckboxes")
-    public Object[][] tickCheckboxes() throws IOException {
+    @DataProvider(name = "getCheckboxesData")
+    private Object[][] getCheckboxesData() throws IOException {
         return getTestDataFromJSON("test-data.checkboxes.checkboxes");
     }
+
 }

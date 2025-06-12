@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class KeyPressesTest extends BaseTest {
@@ -23,10 +24,12 @@ public class KeyPressesTest extends BaseTest {
         keyPressesPage = homePage.clickKeyPressesPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(keyPressesPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), keyPressesPage.getHeaderTitle()));
+        String actualHeaderTitle = keyPressesPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @Test(testName = "Key Presses", priority = 2, dataProvider = "getKeyPress")
@@ -36,7 +39,10 @@ public class KeyPressesTest extends BaseTest {
             String key = keys.next();
             String enumKeyPress = String.valueOf(testData.getEnum(Keys.class, key));
             keyPressesPage.enterText(enumKeyPress);
-            assertEquals(keyPressesPage.getResult(), String.format("You entered: %s", testData.getString(key)), "Input result incorrect");
+            String actualResult = keyPressesPage.getResult();
+            String expectedResult = String.format("You entered: %s", testData.getString(key));
+            assertEquals(actualResult, expectedResult,
+                    onFailure(expectedResult, actualResult));
         }
     }
 
@@ -49,4 +55,5 @@ public class KeyPressesTest extends BaseTest {
     private Object[][] getKeyPress() throws IOException {
         return getTestDataFromJSON("test-data.key-presses.key-presses");
     }
+
 }

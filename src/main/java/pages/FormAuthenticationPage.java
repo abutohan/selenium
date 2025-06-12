@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class FormAuthenticationPage extends BasePage {
 
@@ -32,19 +31,19 @@ public class FormAuthenticationPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void setUsername(String username) {
-        getWait().until(ExpectedConditions.visibilityOf(txtUserName)).sendKeys(username);
+        txtUserName.sendKeys(username);
     }
 
     public void setPassword(String password) {
-        getWait().until(ExpectedConditions.visibilityOf(txtPassword)).sendKeys(password);
+        txtPassword.sendKeys(password);
     }
 
     public SecureAreaPage clickLoginButton() {
-        getWait().until(ExpectedConditions.elementToBeClickable(btnLogin)).click();
+        btnLogin.click();
         return new SecureAreaPage(getDriver());
     }
 }

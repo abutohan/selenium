@@ -10,6 +10,7 @@ import pages.LargeAndDeepDOMPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class LargeAndDeepDOMTest extends BaseTest {
@@ -21,20 +22,28 @@ public class LargeAndDeepDOMTest extends BaseTest {
         largeAndDeepDOMPage = homePage.clickLargeAndDeepDOMPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(largeAndDeepDOMPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), largeAndDeepDOMPage.getHeaderTitle()));
+        String actualHeaderTitle = largeAndDeepDOMPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Long List is Displayed", priority = 2, dataProvider = "getLongListDisplayStatus")
+    @Test(testName = "Long List is Displayed", priority = 3, dataProvider = "getLongListDisplayStatus")
     public void testLargeListIsDisplayed(JSONObject testData) {
-        assertEquals(largeAndDeepDOMPage.scrollToSiblings(), testData.getBoolean("long_list_display_status"));
+        boolean actualStatus = largeAndDeepDOMPage.scrollToSiblings();
+        boolean expectedStatus = testData.getBoolean("long_list_display_status");
+        assertEquals(actualStatus, expectedStatus,
+                onFailure(String.valueOf(expectedStatus), String.valueOf(actualStatus)));
     }
 
-    @Test(testName = "Wide Table is Displayed", priority = 3, dataProvider = "getWideTableDisplayStatus")
+    @Test(testName = "Wide Table is Displayed", priority = 2, dataProvider = "getWideTableDisplayStatus")
     public void testWideTableIsDisplayed(JSONObject testData) {
-        assertEquals(largeAndDeepDOMPage.scrollToTable(), testData.getBoolean("wide_table_display_status"));
+        boolean actualStatus = largeAndDeepDOMPage.scrollToTable();
+        boolean expectedStatus = testData.getBoolean("wide_table_display_status");
+        assertEquals(actualStatus, expectedStatus,
+                onFailure(String.valueOf(expectedStatus), String.valueOf(actualStatus)));
     }
 
     @DataProvider(name = "getHeaderTitle")
@@ -51,4 +60,5 @@ public class LargeAndDeepDOMTest extends BaseTest {
     private Object[][] getWideTableDisplayStatus() throws IOException {
         return getTestDataFromJSON("test-data.large-and-deep-dom.wide-table");
     }
+
 }

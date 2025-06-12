@@ -7,9 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.Set;
 
 public class MultipleWindowsPage extends BasePage {
 
@@ -31,18 +28,13 @@ public class MultipleWindowsPage extends BasePage {
     }
 
     public NewWindowPage openANewWindow() {
-//        String originalWindowHandler = getDriver().getWindowHandle();
-//        Set<String> oldWindowHandles = getDriver().getWindowHandles();
         clickHereLink.click();
-//        getWait().until(ExpectedConditions.numberOfWindowsToBe(oldWindowHandles.size() + 1));
         return new NewWindowPage(getDriver());
     }
 
     public NewWindowPage openANewWindowRightClick() {
-//        String originalWindowHandler = getDriver().getWindowHandle();
-//        Set<String> oldWindowHandles = getDriver().getWindowHandles();
         clickHereLink.sendKeys(Keys.CONTROL, Keys.RETURN);
-//        getWait().until(ExpectedConditions.numberOfWindowsToBe(oldWindowHandles.size() + 1));
         return new NewWindowPage(getDriver());
     }
+
 }

@@ -10,6 +10,7 @@ import pages.InputsPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class InputsTest extends BaseTest {
@@ -21,19 +22,27 @@ public class InputsTest extends BaseTest {
         inputsPage = homePage.clickInputsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(inputsPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), inputsPage.getHeaderTitle()));
+        String actualHeaderTitle = inputsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Set Number", priority = 2, dataProvider = "getNumbersToBeEntered")
+    @Test(testName = "Set Number", priority = 2, dataProvider = "getNumbersToBeEnteredData")
     public void testSetNumber(JSONObject testData) {
-        inputsPage.setInputBySendingKeys(String.valueOf(testData.getInt("number")));
-        assertEquals(inputsPage.getInput(), String.valueOf(testData.getInt("number")));
+        int expectedValue = testData.getInt("number");
+        String expectedValueStr = String.valueOf(expectedValue);
+        inputsPage.setInputBySendingKeys(expectedValueStr);
+        String actualValue = inputsPage.getInput();
+        assertEquals(actualValue, expectedValueStr,
+                onFailure(expectedValueStr, actualValue));
         inputsPage.clearInput();
-        inputsPage.setInputByArrowKeys(testData.getInt("number"));
-        assertEquals(inputsPage.getInput(), String.valueOf(testData.getInt("number")));
+        inputsPage.setInputByArrowKeys(expectedValue);
+        actualValue = inputsPage.getInput();
+        assertEquals(actualValue, expectedValueStr,
+                onFailure(expectedValueStr, actualValue));
     }
 
     @DataProvider(name = "getHeaderTitle")
@@ -41,8 +50,8 @@ public class InputsTest extends BaseTest {
         return getTestDataFromJSON("test-data.inputs.header");
     }
 
-    @DataProvider(name = "getNumbersToBeEntered")
-    private Object[][] getNumbersToBeEntered() throws IOException {
+    @DataProvider(name = "getNumbersToBeEnteredData")
+    private Object[][] getNumbersToBeEnteredData() throws IOException {
         return getTestDataFromJSON("test-data.inputs.inputs");
     }
 

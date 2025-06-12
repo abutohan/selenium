@@ -10,6 +10,7 @@ import pages.InfiniteScrollPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class InfiniteScrollTest extends BaseTest {
@@ -21,16 +22,21 @@ public class InfiniteScrollTest extends BaseTest {
         infiniteScrollPage = homePage.clickInfiniteScrollPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData) throws IOException {
-        assertEquals(infiniteScrollPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), infiniteScrollPage.getHeaderTitle()));
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String actualHeaderTitle = infiniteScrollPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Scroll to nth Paragraph", priority = 2, dataProvider = "getScrollIndex")
-    public void testScrollParagraph(JSONObject testData) throws IOException {
-        infiniteScrollPage.scrollToParagraph(testData.getInt("index"));
-        assertEquals(infiniteScrollPage.getNumberOfParagraphsPresent(), testData.getInt("index"));
+    @Test(testName = "Scroll to nth Paragraph", priority = 2, dataProvider = "getScrollIndexData")
+    public void testScrollParagraph(JSONObject testData) {
+        int expectedScrollIndex = testData.getInt("index");
+        infiniteScrollPage.scrollToParagraph(expectedScrollIndex);
+        int actualScrollIndex = infiniteScrollPage.getNumberOfParagraphsPresent();
+        assertEquals(actualScrollIndex, expectedScrollIndex,
+                onFailure(String.valueOf(expectedScrollIndex), String.valueOf(actualScrollIndex)));
     }
 
     @DataProvider(name = "getHeaderTitle")
@@ -38,9 +44,9 @@ public class InfiniteScrollTest extends BaseTest {
         return getTestDataFromJSON("test-data.infinite-scroll.header");
     }
 
-    @DataProvider(name = "getScrollIndex")
-    private Object[][] getScrollIndex() throws IOException {
-        return getTestDataFromJSON("test-data.infinite-scroll.infinite-scroll");
+    @DataProvider(name = "getScrollIndexData")
+    private Object[][] getScrollIndexData() throws IOException {
+        return getTestDataFromJSON("test-data.infinite-scroll.scroll-index");
     }
 
 }

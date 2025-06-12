@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class MultipleWindowsTest extends BaseTest {
@@ -25,8 +26,10 @@ public class MultipleWindowsTest extends BaseTest {
 
     @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(multipleWindowsPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), multipleWindowsPage.getHeaderTitle()));
+        String actualHeaderTitle = multipleWindowsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @Test(testName = "Open A New Window", priority = 2, dataProvider = "getOpenNewWindowData")

@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Map;
 
@@ -25,13 +24,13 @@ public class LargeAndDeepDOMPage extends BasePage {
     @CacheLookup
     private WebElement siblings;
 
-    public LargeAndDeepDOMPage(WebDriver driver){
+    public LargeAndDeepDOMPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public boolean scrollToSiblings() {
@@ -86,4 +85,5 @@ public class LargeAndDeepDOMPage extends BasePage {
                 right > 0 &&
                 left < viewportWidth);
     }
+
 }

@@ -19,18 +19,28 @@ public class BrokenImagesPage extends BasePage {
 
     private final By imgLoc = By.cssSelector("div.example img");
 
-
     public BrokenImagesPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public int countBrokenImages() {
         List<WebElement> imgElements = getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(imgLoc));
         return (int) imgElements.stream().filter(img -> "0".equals(img.getAttribute("naturalWidth"))).count();
     }
+
+    public boolean allImageAreLoaded() {
+        List<WebElement> imgElements = getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(imgLoc));
+        for (WebElement img : imgElements) {
+            if (!"0".equals(img.getAttribute("naturalWidth"))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

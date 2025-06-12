@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HorizontalSliderPage extends BasePage {
 
@@ -29,16 +28,16 @@ public class HorizontalSliderPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public String getSliderValue() {
-        return getWait().until(ExpectedConditions.visibilityOf(sliderValue)).getText();
+        return sliderValue.getText();
     }
 
     public void setSliderValue(int number) {
         while (number != 0) {
-            getWait().until(ExpectedConditions.visibilityOf(slider)).sendKeys(Keys.ARROW_RIGHT);
+            slider.sendKeys(Keys.ARROW_RIGHT);
             number--;
         }
     }

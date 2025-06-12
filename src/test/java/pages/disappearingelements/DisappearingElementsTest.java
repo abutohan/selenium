@@ -10,6 +10,7 @@ import pages.DisappearingElementsPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class DisappearingElementsTest extends BaseTest {
@@ -21,24 +22,27 @@ public class DisappearingElementsTest extends BaseTest {
         disappearingElementsPage = homePage.clickDisappearingElementsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData){
-        assertEquals(disappearingElementsPage.getHeaderTitle(), "Disappearing Elements",
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), disappearingElementsPage.getHeaderTitle()));
+        String actualHeaderTitle = disappearingElementsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Verify Existence of Element", priority = 2, dataProvider = "getElement")
+    @Test(testName = "Verify Existence of Element", priority = 2, dataProvider = "getElementData")
     public void testExistenceOfElement(JSONObject testData){
         disappearingElementsPage.chekPresenceOfElementLink(testData.getString("element"));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.disappearing-elements.header");
     }
 
-    @DataProvider(name = "getElement")
-    public Object[][] getElement() throws IOException {
-        return getTestDataFromJSON("test-data.disappearing-elements.disappearing-elements");
+    @DataProvider(name = "getElementData")
+    private Object[][] getElementData() throws IOException {
+        return getTestDataFromJSON("test-data.disappearing-elements.elements");
     }
+
 }

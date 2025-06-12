@@ -10,6 +10,7 @@ import pages.AddRemoveElementsPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class AddRemoveElementsTest extends BaseTest {
@@ -21,22 +22,26 @@ public class AddRemoveElementsTest extends BaseTest {
         addRemoveElementsPage = homePage.clickAddRemoveElementsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
-        assertEquals(addRemoveElementsPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), addRemoveElementsPage.getHeaderTitle()));
+        String actualHeaderTitle = addRemoveElementsPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Add/Remove Elements", priority = 2, dataProvider = "addRemoveElements")
-    public void testAddElement(JSONObject testData) {
-
-        addRemoveElementsPage.clickBtnAddElement(testData.getInt("number_of_elements"));
-        assertEquals(addRemoveElementsPage.getAddedElementsCount(), testData.getInt("number_of_elements"),
-                String.format("Expected: %d - Actual: %d", testData.getInt("number_of_elements"), addRemoveElementsPage.getAddedElementsCount()));
+    @Test(testName = "Add/Remove Elements", priority = 2, dataProvider = "getAddRemoveElementsData")
+    public void testAddAndRemoveElements(JSONObject testData) {
+        int expectedNumbersOfElementsToBeAdded = testData.getInt("number_of_elements");
+        addRemoveElementsPage.clickBtnAddElement(expectedNumbersOfElementsToBeAdded);
+        int actualNumbersOfElementAdded = addRemoveElementsPage.getAddedElementsCount();
+        assertEquals(actualNumbersOfElementAdded, expectedNumbersOfElementsToBeAdded,
+                onFailure(String.valueOf(expectedNumbersOfElementsToBeAdded), String.valueOf(actualNumbersOfElementAdded)));
 
         addRemoveElementsPage.clickBtnDeleteElement();
-        assertEquals(addRemoveElementsPage.getAddedElementsCount(), 0,
-                String.format("Expected: %d - Actual: %d", 0, addRemoveElementsPage.getAddedElementsCount()));
+        actualNumbersOfElementAdded = addRemoveElementsPage.getAddedElementsCount();
+        assertEquals(actualNumbersOfElementAdded, 0,
+                onFailure(String.valueOf(0), String.valueOf(actualNumbersOfElementAdded)));
     }
 
     @DataProvider(name = "getHeaderTitle")
@@ -44,8 +49,8 @@ public class AddRemoveElementsTest extends BaseTest {
         return getTestDataFromJSON("test-data.add-remove-elements.header");
     }
 
-    @DataProvider(name = "addRemoveElements")
-    private Object[][] addRemoveElements() throws IOException {
+    @DataProvider(name = "getAddRemoveElementsData")
+    private Object[][] getAddRemoveElementsData() throws IOException {
         return getTestDataFromJSON("test-data.add-remove-elements.add-remove-elements");
     }
 

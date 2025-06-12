@@ -29,15 +29,15 @@ public class AddRemoveElementsPage extends BasePage {
     }
 
     public String getHeaderTitle() {
-        return getWait().until(ExpectedConditions.visibilityOf(headerTitle)).getText();
+        return headerTitle.getText();
     }
 
     public void clickBtnAddElement(int n) {
         for (int i = 0; i < n; i++) {
-            getWait().until(ExpectedConditions.elementToBeClickable(btnAddElement)).click();
+            btnAddElement.click();
         }
     }
-    
+
     public int getAddedElementsCount() {
         List<WebElement> btnAddElements = getDriver().findElements(btnAddedElementLoc);
         return btnAddElements.size();
@@ -46,7 +46,7 @@ public class AddRemoveElementsPage extends BasePage {
     public void clickBtnDeleteElement() {
         getWait().until(ExpectedConditions.visibilityOfElementLocated(btnAddedElementLoc));
         List<WebElement> btnAddElements = getDriver().findElements(btnAddedElementLoc);
-        for(WebElement element: btnAddElements){
+        for (WebElement element : btnAddElements) {
             element.click();
         }
     }

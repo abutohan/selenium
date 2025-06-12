@@ -10,6 +10,7 @@ import pages.FloatingMenuPage;
 import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
+import static utils.Messages.onFailure;
 import static utils.ReadJSON.getTestDataFromJSON;
 
 public class FloatingMenuTest extends BaseTest {
@@ -17,18 +18,20 @@ public class FloatingMenuTest extends BaseTest {
     private FloatingMenuPage floatingMenuPage;
 
     @BeforeMethod
-    public void initPage(){
+    public void initPage() {
         floatingMenuPage = homePage.clickFloatingMenuPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
-    public void testHeaderTitle(JSONObject testData) throws IOException {
-        assertEquals(floatingMenuPage.getHeaderTitle(), testData.getString("header_title"),
-                String.format("Expected: %s - Actual: %s", testData.getString("header_title"), floatingMenuPage.getHeaderTitle()));
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    public void testHeaderTitle(JSONObject testData) {
+        String actualHeaderTitle = floatingMenuPage.getHeaderTitle();
+        String expectedHeaderTitle = testData.getString("header_title");
+        assertEquals(actualHeaderTitle, expectedHeaderTitle,
+                onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
     @DataProvider(name = "getHeaderTitle")
-    public Object[][] getHeaderTitle() throws IOException {
+    private Object[][] getHeaderTitle() throws IOException {
         return getTestDataFromJSON("test-data.floating-menu.header");
     }
 }
