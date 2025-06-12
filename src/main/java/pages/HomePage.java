@@ -160,4 +160,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Multiple Windows");
         return new MultipleWindowsPage(getDriver());
     }
+
+    public NotificationMessagesPage clickNotificationMessagesPage(){
+        clickAnchorLink("Notification Messages");
+        return new NotificationMessagesPage(getDriver());
+    }
 }
