@@ -2,6 +2,7 @@ package pages.largeanddeepdom;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,6 +17,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class LargeAndDeepDOMTest extends BaseTest {
 
     private LargeAndDeepDOMPage largeAndDeepDOMPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Large & Deep DOM");
+    }
 
     @BeforeMethod
     public void initPage() {

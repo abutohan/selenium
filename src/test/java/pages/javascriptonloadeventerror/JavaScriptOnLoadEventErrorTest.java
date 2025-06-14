@@ -2,6 +2,7 @@ package pages.javascriptonloadeventerror;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -15,6 +16,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class JavaScriptOnLoadEventErrorTest extends BaseTest {
 
     private JavaScriptOnLoadEventErrorPage javaScriptOnLoadEventErrorPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("JavaScript On Load Event Error");
+    }
 
     @BeforeMethod
     public void initPage() {

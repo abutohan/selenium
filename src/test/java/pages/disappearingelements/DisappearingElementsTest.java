@@ -2,6 +2,7 @@ package pages.disappearingelements;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,6 +17,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class DisappearingElementsTest extends BaseTest {
 
     private DisappearingElementsPage disappearingElementsPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Disappearing Element");
+    }
 
     @BeforeMethod
     public void initPage(){

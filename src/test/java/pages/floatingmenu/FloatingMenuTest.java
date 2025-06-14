@@ -2,6 +2,7 @@ package pages.floatingmenu;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,6 +17,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class FloatingMenuTest extends BaseTest {
 
     private FloatingMenuPage floatingMenuPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Floating Menu");
+    }
 
     @BeforeMethod
     public void initPage() {

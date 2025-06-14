@@ -3,6 +3,7 @@ package pages.keypresses;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.openqa.selenium.Keys;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,6 +19,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class KeyPressesTest extends BaseTest {
 
     private KeyPressesPage keyPressesPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Key Presses");
+    }
 
     @BeforeMethod
     public void initPage() {
