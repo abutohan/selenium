@@ -26,6 +26,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static utils.Constants.BASE_URL;
 import static utils.ReadProperties.loadProperty;
@@ -41,10 +43,16 @@ public class BaseTest {
     protected static ExtentReports extent;
     protected static ExtentTest test;
 
+
+    protected static String parentFolder;
+
+
     @BeforeSuite
     public void setUpReporter() throws IOException {
         String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         String reportFileName = "Selenium_Automation_Report_" + timestamp + ".html";
+
+        parentFolder = "Selenium_Automation_Report_" + timestamp;
 
         String reportPath = Paths.get(loadProperty().getProperty("report-dir")).toAbsolutePath().toString() + "\\" + reportFileName;
 
@@ -77,23 +85,60 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void tearDown(ITestResult result) throws IOException {
+
+    public void tearDown(ITestResult result) throws IOException, InterruptedException {
 
         String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
+
+        Object t = result.getMethod();
+        System.out.println(t);
+        Pattern pattern = Pattern.compile("([^.]*)"); // Matches any character except a dot, zero or more times
+        Matcher matcher = pattern.matcher(t.toString());
+        String testFolder = null;
+
+        if (matcher.find()) {
+            testFolder = matcher.group(1);
+//            System.out.println("Extracted String: " + extractedString); // Output: ForgotPasswordTest
+
+        } else {
+            System.out.println("No match found.");
+
+        }
+        String screenshotPath = captureScreenshot(parentFolder, testFolder, result.getName(), driver);
+
         String testData = Arrays.toString(result.getParameters());
 
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, testName + " " + testData);
-            String screenshotPath = captureScreenshot(result.getName(), driver);
+            test.log(Status.FAIL, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 //            test.addScreenCaptureFromPath(screenshotPath, "Failed Screenshot");
-            test.log(Status.INFO, result.getThrowable(),
-                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            test.log(Status.INFO, result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, testName + " " + testData);
+            test.log(Status.PASS, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.log(Status.SKIP, testName + " " + testData);
         }
+
+        Thread.sleep(1000);
+// =======
+//     public void tearDown(ITestResult result) throws IOException {
+
+//         String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
+//         String testData = Arrays.toString(result.getParameters());
+
+//         if (result.getStatus() == ITestResult.FAILURE) {
+//             test.log(Status.FAIL, testName + " " + testData);
+//             String screenshotPath = captureScreenshot(result.getName(), driver);
+// //            test.addScreenCaptureFromPath(screenshotPath, "Failed Screenshot");
+//             test.log(Status.INFO, result.getThrowable(),
+//                     MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+
+//         } else if (result.getStatus() == ITestResult.SUCCESS) {
+//             test.log(Status.PASS, testName + " " + testData);
+//         } else if (result.getStatus() == ITestResult.SKIP) {
+//             test.log(Status.SKIP, testName + " " + testData);
+//         }
+// >>>>>>> main
     }
 
 
