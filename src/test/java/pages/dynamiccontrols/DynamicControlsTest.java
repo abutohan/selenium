@@ -2,6 +2,7 @@ package pages.dynamiccontrols;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,6 +17,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class DynamicControlsTest extends BaseTest {
 
     private DynamicControlsPage dynamicControlsPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Dynamic Controls");
+    }
 
     @BeforeMethod
     public void initPage() {

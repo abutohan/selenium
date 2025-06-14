@@ -2,6 +2,7 @@ package pages.dynamicloading;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,6 +19,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class DynamicLoadingTest extends BaseTest {
 
     private DynamicLoadingPage dynamicLoadingPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Dynamic Loading");
+    }
 
     @BeforeMethod
     public void initPage() {

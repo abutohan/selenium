@@ -24,7 +24,8 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-devtools-v137</artifactId>
-            <version>4.33.0</version> </dependency>
+            <version>4.33.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -45,8 +46,14 @@
             <artifactId>json</artifactId>
             <version>20250107</version>
         </dependency>
-    </dependencies>
 
+        <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.2</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

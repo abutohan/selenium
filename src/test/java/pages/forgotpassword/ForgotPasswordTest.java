@@ -2,6 +2,7 @@ package pages.forgotpassword;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,6 +18,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class ForgotPasswordTest extends BaseTest {
 
     private ForgotPasswordPage forgotPasswordPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Forgot Password");
+    }
 
     @BeforeMethod
     public void initPage() {

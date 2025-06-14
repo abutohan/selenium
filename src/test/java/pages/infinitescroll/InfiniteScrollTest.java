@@ -2,6 +2,7 @@ package pages.infinitescroll;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -16,6 +17,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class InfiniteScrollTest extends BaseTest {
 
     private InfiniteScrollPage infiniteScrollPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Infinite Scroll");
+    }
 
     @BeforeMethod
     public void initPage() {

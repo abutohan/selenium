@@ -2,6 +2,7 @@ package pages.abtesting;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,8 +18,13 @@ public class ABTestingTest extends BaseTest {
 
     private ABTestingPage abTestingPage;
 
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("A/B Testing");
+    }
+
     @BeforeMethod
-    public void initPage(){
+    public void initPage() {
         abTestingPage = homePage.clickABTestingPage();
     }
 

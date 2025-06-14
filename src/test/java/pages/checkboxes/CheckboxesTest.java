@@ -3,6 +3,7 @@ package pages.checkboxes;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -19,6 +20,11 @@ import static utils.ReadJSON.getTestDataFromJSON;
 public class CheckboxesTest extends BaseTest {
 
     private CheckboxesPage checkboxesPage;
+
+    @BeforeClass
+    public void initTest() {
+        test = extent.createTest("Checkboxes");
+    }
 
     @BeforeMethod
     public void initPage() {
