@@ -20,6 +20,7 @@
                     <include name="testHeaderTitle"/>
                 </methods>
             </class>
+
             <class name="pages.brokenimages.BrokenImagesTest">
                 <methods>
                     <include name="testHeaderTitle"/>

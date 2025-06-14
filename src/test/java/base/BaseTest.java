@@ -43,12 +43,15 @@ public class BaseTest {
     protected static ExtentReports extent;
     protected static ExtentTest test;
 
+
     protected static String parentFolder;
+
 
     @BeforeSuite
     public void setUpReporter() throws IOException {
         String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         String reportFileName = "Selenium_Automation_Report_" + timestamp + ".html";
+
         parentFolder = "Selenium_Automation_Report_" + timestamp;
 
         String reportPath = Paths.get(loadProperty().getProperty("report-dir")).toAbsolutePath().toString() + "\\" + reportFileName;
@@ -65,6 +68,8 @@ public class BaseTest {
 
     @BeforeClass
     public void setUp() throws IOException {
+
+
         WebDriver originalDriver = new ChromeDriver(getChromeOptions());
         System.out.println("Opening Browser");
         CustomEventListener customEventListener = new CustomEventListener();
@@ -80,6 +85,7 @@ public class BaseTest {
     }
 
     @AfterMethod
+
     public void tearDown(ITestResult result) throws IOException, InterruptedException {
 
         String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
@@ -114,12 +120,32 @@ public class BaseTest {
         }
 
         Thread.sleep(1000);
+// =======
+//     public void tearDown(ITestResult result) throws IOException {
+
+//         String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
+//         String testData = Arrays.toString(result.getParameters());
+
+//         if (result.getStatus() == ITestResult.FAILURE) {
+//             test.log(Status.FAIL, testName + " " + testData);
+//             String screenshotPath = captureScreenshot(result.getName(), driver);
+// //            test.addScreenCaptureFromPath(screenshotPath, "Failed Screenshot");
+//             test.log(Status.INFO, result.getThrowable(),
+//                     MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+
+//         } else if (result.getStatus() == ITestResult.SUCCESS) {
+//             test.log(Status.PASS, testName + " " + testData);
+//         } else if (result.getStatus() == ITestResult.SKIP) {
+//             test.log(Status.SKIP, testName + " " + testData);
+//         }
+// >>>>>>> main
     }
 
 
     @AfterClass
     public void tearDown() {
         System.out.println("Closing Browser");
+
         driver.quit();
     }
 
