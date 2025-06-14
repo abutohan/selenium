@@ -30,7 +30,7 @@ public class MultipleWindowsTest extends BaseTest {
         multipleWindowsPage = homePage.clickMultipleWindowsPage();
     }
 
-    @Test(testName = "Page Displayed Correctly", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = multipleWindowsPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");

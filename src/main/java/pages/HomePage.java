@@ -3,7 +3,6 @@ package pages;
 import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.bidi.module.Input;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
@@ -159,5 +158,20 @@ public class HomePage extends BasePage {
     public MultipleWindowsPage clickMultipleWindowsPage(){
         clickAnchorLink("Multiple Windows");
         return new MultipleWindowsPage(getDriver());
+    }
+
+    public NotificationMessagesPage clickNotificationMessagesPage(){
+        clickAnchorLink("Notification Messages");
+        return new NotificationMessagesPage(getDriver());
+    }
+
+    public SecureFileDownloadPage clickSecureFileDownloadPage(){
+        clickAnchorLink("Secure File Download");
+        return new SecureFileDownloadPage(getDriver());
+    }
+
+    public StatusCodesPage clickStatusCodesPage(){
+        clickAnchorLink("Status Codes");
+        return new StatusCodesPage(getDriver());
     }
 }
