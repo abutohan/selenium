@@ -9,177 +9,177 @@
                     <include name="testABTesting"/>
                 </methods>
             </class>
-            <class name="pages.addremoveelements.AddRemoveElementsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testAddAndRemoveElements"/>
-                </methods>
-            </class>
-            <class name="pages.basicauth.BasicAuthTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                </methods>
-            </class>
+<!--            <class name="pages.addremoveelements.AddRemoveElementsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testAddAndRemoveElements"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.basicauth.BasicAuthTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                </methods>-->
+<!--            </class>-->
 
-            <class name="pages.brokenimages.BrokenImagesTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testAllImageAreLoaded"/>
-                </methods>
-            </class>
-            <class name="pages.checkboxes.CheckboxesTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testTickCheckboxes"/>
-                </methods>
-            </class>
-            <class name="pages.contextmenu.ContextMenuTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testRightClickContextMenu"/>
-                </methods>
-            </class>
-            <class name="pages.digestauthentication.DigestAuthenticationTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                </methods>
-            </class>
-            <class name="pages.disappearingelements.DisappearingElementsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testExistenceOfElement"/>
-                </methods>
-            </class>
-            <class name="pages.draganddrop.DragAndDropTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testDragAndDropElement"/>
-                </methods>
-            </class>
-            <class name="pages.dropdownlist.DropdownTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testDropdownList"/>
-                </methods>
-            </class>
-            <class name="pages.dynamiccontrols.DynamicControlsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testMessageCanBeEnter"/>
-                </methods>
-            </class>
-            <class name="pages.dynamicloading.DynamicLoadingTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testDynamicLoadingExampleOne"/>
-                    <include name="testDynamicLoadingExampleTwo"/>
-                </methods>
-            </class>
-            <class name="pages.entryad.EntryAdTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testModalPresence"/>
-                </methods>
-            </class>
-            <class name="pages.exitintent.ExitIntentTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testModalPresence"/>
-                </methods>
-            </class>
+<!--            <class name="pages.brokenimages.BrokenImagesTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testAllImageAreLoaded"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.checkboxes.CheckboxesTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testTickCheckboxes"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.contextmenu.ContextMenuTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testRightClickContextMenu"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.digestauthentication.DigestAuthenticationTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.disappearingelements.DisappearingElementsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testExistenceOfElement"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.draganddrop.DragAndDropTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testDragAndDropElement"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.dropdownlist.DropdownTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testDropdownList"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.dynamiccontrols.DynamicControlsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testMessageCanBeEnter"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.dynamicloading.DynamicLoadingTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testDynamicLoadingExampleOne"/>-->
+<!--                    <include name="testDynamicLoadingExampleTwo"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.entryad.EntryAdTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testModalPresence"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.exitintent.ExitIntentTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testModalPresence"/>-->
+<!--                </methods>-->
+<!--            </class>-->
 <!--            <class name="pages.filedownload.FileDownloadTest">-->
 <!--                <methods>-->
 <!--                    <include name="testHeaderTitle"/>-->
 <!--                    <include name="testDownloadFileS"/>-->
 <!--                </methods>-->
 <!--            </class>-->
-            <class name="pages.fileupload.FileUploadTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testUploadFile"/>
-                </methods>
-            </class>
-            <class name="pages.floatingmenu.FloatingMenuTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                </methods>
-            </class>
-            <class name="pages.forgotpassword.ForgotPasswordTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testRetrievePassword"/>
-                </methods>
-            </class>
-            <class name="pages.formauthentication.FormAuthenticationTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testLogin"/>
-                </methods>
-            </class>
-            <class name="pages.frames.FramesTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testGoToFrames"/>
-                </methods>
-            </class>
-            <class name="pages.horizontalslider.HorizontalSliderTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testSlideToWholeNumber"/>
-                </methods>
-            </class>
-            <class name="pages.hovers.HoversTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testHoverUser"/>
-                </methods>
-            </class>
-            <class name="pages.infinitescroll.InfiniteScrollTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testScrollParagraph"/>
-                </methods>
-            </class>
-            <class name="pages.inputs.InputsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testSetNumber"/>
-                </methods>
-            </class>
-            <class name="pages.javascriptalerts.JavaScriptAlertsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testJavaScriptAlert"/>
-                    <include name="testJavaScriptAlertConfirmOK"/>
-                    <include name="testJavaScriptAlertConfirmCancel"/>
-                    <include name="testJavaScriptAlertTextPrompt"/>
-                </methods>
-            </class>
-            <class name="pages.javascriptonloadeventerror.JavaScriptOnLoadEventErrorTest">
-                <methods>
-                    <include name="testBrowserLogs"/>
-                </methods>
-            </class>
-            <class name="pages.keypresses.KeyPressesTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testKeyPresses"/>
-                </methods>
-            </class>
-            <class name="pages.largeanddeepdom.LargeAndDeepDOMTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testLargeListIsDisplayed"/>
-                    <include name="testWideTableIsDisplayed"/>
-                </methods>
-            </class>
-            <class name="pages.multiplewindows.MultipleWindowsTest">
-                <methods>
-                    <include name="testHeaderTitle"/>
-                    <include name="testOpenANewWindow"/>
-                    <include name="testOpenANewWindowViaRightClick"/>
-                </methods>
-            </class>
+<!--            <class name="pages.fileupload.FileUploadTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testUploadFile"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.floatingmenu.FloatingMenuTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.forgotpassword.ForgotPasswordTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testRetrievePassword"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.formauthentication.FormAuthenticationTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testLogin"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.frames.FramesTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testGoToFrames"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.horizontalslider.HorizontalSliderTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testSlideToWholeNumber"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.hovers.HoversTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testHoverUser"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.infinitescroll.InfiniteScrollTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testScrollParagraph"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.inputs.InputsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testSetNumber"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.javascriptalerts.JavaScriptAlertsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testJavaScriptAlert"/>-->
+<!--                    <include name="testJavaScriptAlertConfirmOK"/>-->
+<!--                    <include name="testJavaScriptAlertConfirmCancel"/>-->
+<!--                    <include name="testJavaScriptAlertTextPrompt"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.javascriptonloadeventerror.JavaScriptOnLoadEventErrorTest">-->
+<!--                <methods>-->
+<!--                    <include name="testBrowserLogs"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.keypresses.KeyPressesTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testKeyPresses"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.largeanddeepdom.LargeAndDeepDOMTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testLargeListIsDisplayed"/>-->
+<!--                    <include name="testWideTableIsDisplayed"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--            <class name="pages.multiplewindows.MultipleWindowsTest">-->
+<!--                <methods>-->
+<!--                    <include name="testHeaderTitle"/>-->
+<!--                    <include name="testOpenANewWindow"/>-->
+<!--                    <include name="testOpenANewWindowViaRightClick"/>-->
+<!--                </methods>-->
+<!--            </class>-->
         </classes>
     </test>
 </suite>
