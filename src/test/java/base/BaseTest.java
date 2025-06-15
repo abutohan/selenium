@@ -4,10 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
@@ -16,61 +13,51 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.HomePage;
 import utils.CustomEventListener;
+import utils.ExtentReportManager;
 import utils.WindowManager;
+import utils.browsers.BrowserGetter;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static utils.Constants.BASE_URL;
+import static utils.Constants.*;
 import static utils.ReadProperties.loadProperty;
 import static utils.Screenshot.captureScreenshot;
 
 
 public class BaseTest {
 
-    protected HomePage homePage;
-    protected WebDriver driver;
-
-    protected static ExtentSparkReporter htmlReporter;
+    //    protected final static Chrome chrome = new Chrome();
+    protected final static BrowserGetter browserGetter = new BrowserGetter();
+//    protected WebDriver driver;
+    protected static WebDriver driver;
+    protected static ExtentReportManager extentReportManager;
     protected static ExtentReports extent;
     protected static ExtentTest test;
-
-
-    protected static String parentFolder;
-
+    protected static String screenshotFolder;
+    protected HomePage homePage;
 
     @BeforeSuite
     public void setUpReporter() throws IOException {
-        String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-        String reportFileName = "Selenium_Automation_Report_" + timestamp + ".html";
-
-        parentFolder = "Selenium_Automation_Report_" + timestamp;
-
-        String reportPath = Paths.get(loadProperty().getProperty("report-dir")).toAbsolutePath().toString() + "\\" + reportFileName;
-
-        htmlReporter = new ExtentSparkReporter(reportPath);
-        extent = new ExtentReports();
-        extent.attachReporter(htmlReporter);
-
-        htmlReporter.config().setOfflineMode(true);
-        htmlReporter.config().setDocumentTitle("Selenium Automation Report");
-        htmlReporter.config().setReportName("Test Execution Results");
-        htmlReporter.config().setTheme(Theme.DARK);
+        String timestamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(new Date());
+        screenshotFolder = REPORT_FILE_NAME + timestamp;
+        extentReportManager = new ExtentReportManager();
+        extentReportManager.setUpReporter(timestamp);
+        extent = extentReportManager.getExtentReports();
     }
 
     @BeforeClass
-    public void setUp() throws IOException {
+    public void setUpBrowser() throws IOException {
 
+//        WebDriver originalDriver = new ChromeDriver(getChromeOptions());
 
-        WebDriver originalDriver = new ChromeDriver(getChromeOptions());
+        WebDriver originalDriver = browserGetter.getBrowser("edge");
+
         System.out.println("Opening Browser");
         CustomEventListener customEventListener = new CustomEventListener();
         EventFiringDecorator<WebDriver> eventFiringDecorator = new EventFiringDecorator<>(customEventListener);
@@ -85,67 +72,40 @@ public class BaseTest {
     }
 
     @AfterMethod
+    public void screenCapture(ITestResult result) throws IOException, InterruptedException {
+        String testName = Objects.requireNonNull(result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class)).testName();
 
-    public void tearDown(ITestResult result) throws IOException, InterruptedException {
-
-        String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
-
-        Object t = result.getMethod();
-        System.out.println(t);
-        Pattern pattern = Pattern.compile("([^.]*)"); // Matches any character except a dot, zero or more times
-        Matcher matcher = pattern.matcher(t.toString());
+        String testMethod = result.getMethod().toString();
+        Pattern pattern = Pattern.compile("([^.]*)");
+        Matcher matcher = pattern.matcher(testMethod);
         String testFolder = null;
 
         if (matcher.find()) {
             testFolder = matcher.group(1);
-//            System.out.println("Extracted String: " + extractedString); // Output: ForgotPasswordTest
-
         } else {
-            System.out.println("No match found.");
-
+            testFolder = "testFolder";
         }
-        String screenshotPath = captureScreenshot(parentFolder, testFolder, result.getName(), driver);
+
+        String screenshot = captureScreenshot(screenshotFolder, testFolder, result.getName(), driver);
 
         String testData = Arrays.toString(result.getParameters());
 
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-//            test.addScreenCaptureFromPath(screenshotPath, "Failed Screenshot");
-            test.log(Status.INFO, result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-
+            test.log(Status.FAIL, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build());
+            test.log(Status.INFO, result.getThrowable(), MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build());
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+            test.log(Status.PASS, testName + " " + testData, MediaEntityBuilder.createScreenCaptureFromPath(screenshot).build());
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.log(Status.SKIP, testName + " " + testData);
         }
 
         Thread.sleep(1000);
-// =======
-//     public void tearDown(ITestResult result) throws IOException {
-
-//         String testName = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(Test.class).testName();
-//         String testData = Arrays.toString(result.getParameters());
-
-//         if (result.getStatus() == ITestResult.FAILURE) {
-//             test.log(Status.FAIL, testName + " " + testData);
-//             String screenshotPath = captureScreenshot(result.getName(), driver);
-// //            test.addScreenCaptureFromPath(screenshotPath, "Failed Screenshot");
-//             test.log(Status.INFO, result.getThrowable(),
-//                     MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-
-//         } else if (result.getStatus() == ITestResult.SUCCESS) {
-//             test.log(Status.PASS, testName + " " + testData);
-//         } else if (result.getStatus() == ITestResult.SKIP) {
-//             test.log(Status.SKIP, testName + " " + testData);
-//         }
-// >>>>>>> main
     }
 
 
     @AfterClass
-    public void tearDown() {
+    public void tearDownBrowser() {
         System.out.println("Closing Browser");
-
         driver.quit();
     }
 
@@ -163,7 +123,7 @@ public class BaseTest {
 
         //prefs
         Map<String, Object> prefs = new HashMap<>();
-        String downloadPath = Paths.get(loadProperty().getProperty("download-dir")).toAbsolutePath().toString();
+        String downloadPath = Paths.get(loadProperty().getProperty(DOWNLOAD_DIR_PROPERTY)).toAbsolutePath().toString();
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.BROWSER, Level.ALL);
         //download prefs
