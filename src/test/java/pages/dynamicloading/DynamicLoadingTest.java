@@ -2,6 +2,7 @@ package pages.dynamicloading;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -20,17 +21,17 @@ public class DynamicLoadingTest extends BaseTest {
 
     private DynamicLoadingPage dynamicLoadingPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Dynamic Loading");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         dynamicLoadingPage = homePage.clickDynamicLoadingPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = dynamicLoadingPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -38,7 +39,12 @@ public class DynamicLoadingTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Example Page 1", priority = 2, dataProvider = "getExampleOneMessageData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Example Page 1", priority = 2, dataProvider = "getExampleOneMessageData", groups = {"regression"})
     public void testDynamicLoadingExampleOne(JSONObject testData) {
         DynamicLoadingExample1Page dynamicLoadingExample1PagePage = dynamicLoadingPage.exampleOne();
         dynamicLoadingExample1PagePage.clickStart();
@@ -48,7 +54,12 @@ public class DynamicLoadingTest extends BaseTest {
                 onFailure(expectedMessage, actualMessage));
     }
 
-    @Test(testName = "Example Page 2", priority = 3, dataProvider = "getExampleTwoMessageData")
+    @DataProvider(name = "getExampleOneMessageData")
+    private Object[][] getExampleOneMessageData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("example-one"));
+    }
+
+    @Test(testName = "Example Page 2", priority = 3, dataProvider = "getExampleTwoMessageData", groups = {"regression"})
     public void testDynamicLoadingExampleTwo(JSONObject testData) {
         DynamicLoadingExample2Page dynamicLoadingExample2PagePage = dynamicLoadingPage.exampleTwo();
         dynamicLoadingExample2PagePage.clickStart();
@@ -58,19 +69,9 @@ public class DynamicLoadingTest extends BaseTest {
                 onFailure(expectedMessage, actualMessage));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-loading.header");
-    }
-
-    @DataProvider(name = "getExampleOneMessageData")
-    private Object[][] getExampleOneMessageData() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-loading.example-one");
-    }
-
     @DataProvider(name = "getExampleTwoMessageData")
-    private Object[][] getExampleTwoMessageData() throws IOException {
-        return getTestDataFromJSON("test-data.dynamic-loading.example-two");
+    private Object[][] getExampleTwoMessageData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("example-one"));
     }
 
 }

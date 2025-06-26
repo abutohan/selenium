@@ -6,20 +6,19 @@ import java.io.IOException;
 
 public class BrowserGetter {
 
-
-    public WebDriver getBrowser(String browser) throws IOException {
-        Browser browser1;
-        switch (browser) {
+    public WebDriver getBrowser(String browserName) throws IOException {
+        Browser browser;
+        switch (browserName) {
             case "chrome":
-                browser1 = new Chrome();
+                browser = new Chrome();
                 break;
             case "edge":
-                browser1 = new Edge();
+                browser = new Edge();
                 break;
             default:
-                browser1 = new Chrome();
+                browser = new Chrome();
                 break;
         }
-        return browser1.getBrowser();
+        return browser.getBrowser();
     }
 }

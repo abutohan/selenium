@@ -17,8 +17,6 @@ import static utils.ReadProperties.loadProperty;
 
 public class Chrome implements Browser {
 
-
-    //    private WebDriver driver;
     @Override
     public WebDriver getBrowser() throws IOException {
 //        setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver.exe");
@@ -32,8 +30,10 @@ public class Chrome implements Browser {
         //prefs
         Map<String, Object> prefs = new HashMap<>();
         String downloadPath = Paths.get(loadProperty().getProperty(DOWNLOAD_DIR_PROPERTY)).toAbsolutePath().toString();
+
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.BROWSER, Level.ALL);
+
         //download prefs
         prefs.put("download.default_directory", downloadPath);
         prefs.put("download.prompt_for_download", false);

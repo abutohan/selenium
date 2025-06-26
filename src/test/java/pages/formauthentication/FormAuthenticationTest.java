@@ -2,6 +2,7 @@ package pages.formauthentication;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -20,17 +21,17 @@ public class FormAuthenticationTest extends BaseTest {
 
     private FormAuthenticationPage formAuthenticationPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Form Authentication");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         formAuthenticationPage = homePage.clickFormAuthenticationPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = formAuthenticationPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -38,7 +39,12 @@ public class FormAuthenticationTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Login", priority = 1, dataProvider = "getUserCredentialsDetails")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Login", priority = 1, dataProvider = "getUserCredentialsDetails", groups = {"regression"})
     public void testLogin(JSONObject testData) {
         String username = testData.getString("username");
         String password = testData.getString("password");
@@ -51,14 +57,9 @@ public class FormAuthenticationTest extends BaseTest {
                 onFailure(expectedAlertMessage, actualAlertMessage));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.form-authentication.header");
-    }
-
     @DataProvider(name = "getUserCredentialsDetails")
-    private Object[][] getUserCredentialsDetails() throws IOException {
-        return getTestDataFromJSON("test-data.form-authentication.users");
+    private Object[][] getUserCredentialsDetails(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("users"));
     }
 
 }

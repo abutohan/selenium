@@ -2,6 +2,7 @@ package pages.frames;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -19,17 +20,17 @@ public class FramesTest extends BaseTest {
 
     private FramesPage framesPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Frames");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         framesPage = homePage.clickFramesPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = framesPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -37,7 +38,12 @@ public class FramesTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Nested Frames", priority = 2, dataProvider = "getNestedFramesData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Nested Frames", priority = 2, dataProvider = "getNestedFramesData", groups = {"regression"})
     public void testGoToFrames(JSONObject testData) {
         NestedFramesPage nestedFramesPage = framesPage.clickNestedFrames();
         String parentFrame = testData.getString("parentFrame");
@@ -48,14 +54,9 @@ public class FramesTest extends BaseTest {
                 onFailure(expectedMessage, actualMessage));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.frames.header");
-    }
-
     @DataProvider(name = "getNestedFramesData")
-    private Object[][] getNestedFramesData() throws IOException {
-        return getTestDataFromJSON("test-data.frames.nested");
+    private Object[][] getNestedFramesData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("nested"));
     }
 
 }

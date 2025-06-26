@@ -2,6 +2,7 @@ package pages.basicauth;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class BasicAuthTest extends BaseTest {
 
     private BasicAuthPage basicAuthPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Basic Auth");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         basicAuthPage = homePage.clickBasicAuthPage();
     }
 
-    @Test(testName = "Page is Displayed", dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", dataProvider = "getHeaderTitle", groups = {"smoke", "regression"})
     public void testHeaderTitle(JSONObject testData) {
         String username = testData.getString("username");
         String password = testData.getString("password");
@@ -39,8 +40,8 @@ public class BasicAuthTest extends BaseTest {
     }
 
     @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.basic-auth.header");
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
     }
 
 }

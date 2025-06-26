@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import static utils.Constants.DOWNLOAD_DIR_PROPERTY;
+import static utils.Messages.onPropertyNotFound;
 import static utils.ReadProperties.loadProperty;
 
 public class Edge implements Browser {
@@ -46,7 +47,7 @@ public class Edge implements Browser {
         String downloadPath = loadProperty().getProperty(DOWNLOAD_DIR_PROPERTY);
         if (downloadPath == null || downloadPath.isBlank()) {
             throw new IllegalArgumentException(
-                    String.format(loadProperty().getProperty(DOWNLOAD_DIR_PROPERTY)));
+                    String.format(onPropertyNotFound(DOWNLOAD_DIR_PROPERTY)));
         }
         String absoluteDownloadPath = Paths.get(downloadPath).toAbsolutePath().toString();
 

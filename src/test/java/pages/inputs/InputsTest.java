@@ -2,6 +2,7 @@ package pages.inputs;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class InputsTest extends BaseTest {
 
     private InputsPage inputsPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Inputs");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         inputsPage = homePage.clickInputsPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = inputsPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,7 +37,12 @@ public class InputsTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Set Number", priority = 2, dataProvider = "getNumbersToBeEnteredData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Set Number", priority = 2, dataProvider = "getNumbersToBeEnteredData", groups = {"regression"})
     public void testSetNumber(JSONObject testData) {
         int expectedValue = testData.getInt("number");
         String expectedValueStr = String.valueOf(expectedValue);
@@ -51,14 +57,9 @@ public class InputsTest extends BaseTest {
                 onFailure(expectedValueStr, actualValue));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.inputs.header");
-    }
-
     @DataProvider(name = "getNumbersToBeEnteredData")
-    private Object[][] getNumbersToBeEnteredData() throws IOException {
-        return getTestDataFromJSON("test-data.inputs.inputs");
+    private Object[][] getNumbersToBeEnteredData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("inputs"));
     }
 
 }

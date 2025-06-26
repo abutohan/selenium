@@ -3,6 +3,7 @@ package pages.checkboxes;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -21,17 +22,17 @@ public class CheckboxesTest extends BaseTest {
 
     private CheckboxesPage checkboxesPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Checkboxes");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         checkboxesPage = homePage.clickCheckboxesPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle",  groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = checkboxesPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -39,7 +40,12 @@ public class CheckboxesTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Tick Checkboxes", priority = 2, dataProvider = "getCheckboxesData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Tick Checkboxes", priority = 2, dataProvider = "getCheckboxesData",  groups = {"regression"})
     public void testTickCheckboxes(JSONObject testData) {
 
         //get possible count of checkbox
@@ -62,14 +68,9 @@ public class CheckboxesTest extends BaseTest {
         }
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.checkboxes.header");
-    }
-
     @DataProvider(name = "getCheckboxesData")
-    private Object[][] getCheckboxesData() throws IOException {
-        return getTestDataFromJSON("test-data.checkboxes.checkboxes");
+    private Object[][] getCheckboxesData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("checkboxes"));
     }
 
 }

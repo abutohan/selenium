@@ -3,6 +3,7 @@ package pages.draganddrop;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.openqa.selenium.WebElement;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -20,17 +21,17 @@ public class DragAndDropTest extends BaseTest {
 
     private DragAndDropPage dragAndDropPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Drag and Drop");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         dragAndDropPage = homePage.clickDragAndDropPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = dragAndDropPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -38,7 +39,13 @@ public class DragAndDropTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Drag and Drop Element", priority = 2, dataProvider = "getBoxHeaderData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+
+    @Test(testName = "Drag and Drop Element", priority = 2, dataProvider = "getBoxHeaderData", groups = {"regression"})
     public void testDragAndDropElement(JSONObject testData) {
         dragAndDropPage.dragAndDrop(testData.getString("scenario"));
 
@@ -51,13 +58,8 @@ public class DragAndDropTest extends BaseTest {
         }
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.drag-and-drop.header");
-    }
-
     @DataProvider(name = "getBoxHeaderData")
-    private Object[][] getBoxHeaderData() throws IOException {
-        return getTestDataFromJSON("test-data.drag-and-drop.box-header");
+    private Object[][] getBoxHeaderData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("box-header"));
     }
 }
