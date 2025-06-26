@@ -2,6 +2,7 @@ package pages.horizontalslider;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class HorizontalSliderTest extends BaseTest {
 
     private HorizontalSliderPage horizontalSliderPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Horizontal Slider");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         horizontalSliderPage = homePage.clickHorizontalSliderPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = horizontalSliderPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,7 +37,12 @@ public class HorizontalSliderTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Slide to Number", priority = 2, dataProvider = "getSliderValueData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Slide to Number", priority = 2, dataProvider = "getSliderValueData", groups = {"regression"})
     public void testSlideToWholeNumber(JSONObject testData) {
         int sliderValue = testData.getInt("slider_number");
         horizontalSliderPage.setSliderValue(sliderValue);
@@ -46,14 +52,9 @@ public class HorizontalSliderTest extends BaseTest {
                 onFailure(expectedValue, actualValue));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.horizontal-slider.header");
-    }
-
     @DataProvider(name = "getSliderValueData")
-    private Object[][] getSliderValueData() throws IOException {
-        return getTestDataFromJSON("test-data.horizontal-slider.slider-value");
+    private Object[][] getSliderValueData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("slider-value"));
     }
 
 }

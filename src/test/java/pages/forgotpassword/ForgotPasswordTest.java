@@ -2,6 +2,7 @@ package pages.forgotpassword;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -19,17 +20,17 @@ public class ForgotPasswordTest extends BaseTest {
 
     private ForgotPasswordPage forgotPasswordPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Forgot Password");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         forgotPasswordPage = homePage.clickForgotPasswordPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = forgotPasswordPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -37,7 +38,12 @@ public class ForgotPasswordTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Retrieve Password", priority = 2, dataProvider = "getEmailData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Retrieve Password", priority = 2, dataProvider = "getEmailData", groups = {"regression"})
     public void testRetrievePassword(JSONObject testData) {
         String email = testData.getString("email");
         EmailSentPage emailSentPage = forgotPasswordPage.retrievePassword(email);
@@ -47,14 +53,9 @@ public class ForgotPasswordTest extends BaseTest {
                 onFailure(expectedMessage, actualMessage));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.forgot-password.header");
-    }
-
     @DataProvider(name = "getEmailData")
-    private Object[][] getEmailData() throws IOException {
-        return getTestDataFromJSON("test-data.forgot-password.emails");
+    private Object[][] getEmailData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("emails"));
     }
 
 }

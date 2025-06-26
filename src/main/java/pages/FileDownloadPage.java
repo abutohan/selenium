@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static utils.Constants.DOWNLOAD_TIMEOUT;
+import static utils.DownloadsUtil.absoluteDownloadPath;
 import static utils.DownloadsUtil.waitForDownloadCompletion;
 
 public class FileDownloadPage extends BasePage {
@@ -39,7 +40,7 @@ public class FileDownloadPage extends BasePage {
         getWait().until(ExpectedConditions.visibilityOfAllElements(downloadLinks));
 
         //get absolute path
-        String downloadPath = DownloadsUtil.absoluteDownloadPath(downloadDir);
+        String downloadPath = absoluteDownloadPath(downloadDir);
 
         //clear download directory
         //clearDownloadDirectory(downloadPath);

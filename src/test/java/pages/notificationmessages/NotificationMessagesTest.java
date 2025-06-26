@@ -2,6 +2,7 @@ package pages.notificationmessages;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -19,17 +20,17 @@ public class NotificationMessagesTest extends BaseTest {
 
     private NotificationMessagesPage notificationMessagesPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Notification Messages");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         notificationMessagesPage = homePage.clickNotificationMessagesPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = notificationMessagesPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -37,20 +38,20 @@ public class NotificationMessagesTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Notification Message Successful", priority = 2, dataProvider = "getNotificationMessageData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Notification Message Successful", priority = 2, dataProvider = "getNotificationMessageData", groups = {"regression"})
     public void testNotificationMessages(JSONObject testData) {
         String message = testData.getString("notification_message");
         assertTrue(notificationMessagesPage.checkNotificationMessage(message));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.notification-messages.header");
-    }
-
     @DataProvider(name = "getNotificationMessageData")
-    private Object[][] getNotificationMessageData() throws IOException {
-        return getTestDataFromJSON("test-data.notification-messages.message");
+    private Object[][] getNotificationMessageData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("message"));
     }
 
 }

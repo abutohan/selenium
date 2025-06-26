@@ -2,6 +2,7 @@ package pages.securefiledownload;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class SecureFileDownloadTest extends BaseTest {
 
     private SecureFileDownloadPage secureFileDownloadPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Secure File Download");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage(){
         secureFileDownloadPage = homePage.clickSecureFileDownloadPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke", "regression"})
     public void testHeaderTitle(JSONObject testData) {
         String username = testData.getString("username");
         String password = testData.getString("password");
@@ -39,8 +40,8 @@ public class SecureFileDownloadTest extends BaseTest {
     }
 
     @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.secure-file-download.header");
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
     }
 
 }

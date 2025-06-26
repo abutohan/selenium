@@ -2,6 +2,7 @@ package pages.javascriptalerts;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class JavaScriptAlertsTest extends BaseTest {
 
     private JavaScriptAlertsPage javaScriptAlertsPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("JavaScript Alerts");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         javaScriptAlertsPage = homePage.clickJavaScriptAlertsPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle",  groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = javaScriptAlertsPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,7 +37,12 @@ public class JavaScriptAlertsTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "JavaScript Alert", priority = 2, dataProvider = "javaScriptAlertData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "JavaScript Alert", priority = 2, dataProvider = "javaScriptAlertData",  groups = {"regression"})
     public void testJavaScriptAlert(JSONObject testData) {
         javaScriptAlertsPage.clickAlert();
         String actualMessage = javaScriptAlertsPage.getAlertText();
@@ -50,7 +56,12 @@ public class JavaScriptAlertsTest extends BaseTest {
                 onFailure(expectedResult, actualResult));
     }
 
-    @Test(testName = "JavaScript Alert Confirm OK", priority = 3, dataProvider = "javaScriptConfirmOKData")
+    @DataProvider(name = "javaScriptAlertData")
+    private Object[][] javaScriptAlertData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("alert"));
+    }
+
+    @Test(testName = "JavaScript Alert Confirm OK", priority = 3, dataProvider = "javaScriptConfirmOKData", groups = {"regression"})
     public void testJavaScriptAlertConfirmOK(JSONObject testData) {
         javaScriptAlertsPage.clickConfirm();
         String actualMessage = javaScriptAlertsPage.getAlertText();
@@ -64,7 +75,12 @@ public class JavaScriptAlertsTest extends BaseTest {
                 onFailure(expectedResult, actualResult));
     }
 
-    @Test(testName = "JavaScript Alert Confirm Cancel", priority = 4, dataProvider = "javaScriptConfirmCancelData")
+    @DataProvider(name = "javaScriptConfirmOKData")
+    private Object[][] javaScriptConfirmOKData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("confirm-ok"));
+    }
+
+    @Test(testName = "JavaScript Alert Confirm Cancel", priority = 4, dataProvider = "javaScriptConfirmCancelData", groups = {"regression"})
     public void testJavaScriptAlertConfirmCancel(JSONObject testData) {
         javaScriptAlertsPage.clickConfirm();
         String actualMessage = javaScriptAlertsPage.getAlertText();
@@ -78,7 +94,12 @@ public class JavaScriptAlertsTest extends BaseTest {
                 onFailure(expectedResult, actualResult));
     }
 
-    @Test(testName = "JavaScript Alert Text Prompt", priority = 4, dataProvider = "javaScriptAlertTextPromptData")
+    @DataProvider(name = "javaScriptConfirmCancelData")
+    private Object[][] javaScriptConfirmCancelData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("confirm-cancel"));
+    }
+
+    @Test(testName = "JavaScript Alert Text Prompt", priority = 5, dataProvider = "javaScriptAlertTextPromptData", groups = {"regression"})
     public void testJavaScriptAlertTextPrompt(JSONObject testData) {
         javaScriptAlertsPage.clickPrompt();
         String actualMessage = testData.getString("alert_text");
@@ -90,29 +111,9 @@ public class JavaScriptAlertsTest extends BaseTest {
                 onFailure(expectedMessage, actualResult));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.javascript-alerts.header");
-    }
-
-    @DataProvider(name = "javaScriptAlertData")
-    private Object[][] javaScriptAlertData() throws IOException {
-        return getTestDataFromJSON("test-data.javascript-alerts.alert");
-    }
-
-    @DataProvider(name = "javaScriptConfirmOKData")
-    private Object[][] javaScriptConfirmOKData() throws IOException {
-        return getTestDataFromJSON("test-data.javascript-alerts.confirm-ok");
-    }
-
-    @DataProvider(name = "javaScriptConfirmCancelData")
-    private Object[][] javaScriptConfirmCancelData() throws IOException {
-        return getTestDataFromJSON("test-data.javascript-alerts.confirm-cancel");
-    }
-
     @DataProvider(name = "javaScriptAlertTextPromptData")
-    private Object[][] javaScriptAlertTextPromptData() throws IOException {
-        return getTestDataFromJSON("test-data.javascript-alerts.prompt");
+    private Object[][] javaScriptAlertTextPromptData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("prompt"));
     }
 
 }

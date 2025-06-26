@@ -2,6 +2,7 @@ package pages.contextmenu;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class ContextMenuTest extends BaseTest {
 
     private ContextMenuPage contextMenuPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Context Menu");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         contextMenuPage = homePage.clickContextMenuPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = contextMenuPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,7 +37,12 @@ public class ContextMenuTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Right Click Context Menu", priority = 2, dataProvider = "getAlertMessageData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Right Click Context Menu", priority = 2, dataProvider = "getAlertMessageData", groups = {"regression"})
     public void testRightClickContextMenu(JSONObject testData) {
         contextMenuPage.rightClickTheBox();
         String actualAlertMessage = contextMenuPage.getPopUpText();
@@ -46,14 +52,9 @@ public class ContextMenuTest extends BaseTest {
         contextMenuPage.acceptPopUp();
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.context-menu.header");
-    }
-
     @DataProvider(name = "getAlertMessageData")
-    private Object[][] getAlertMessageData() throws IOException {
-        return getTestDataFromJSON("test-data.context-menu.alert-message");
+    private Object[][] getAlertMessageData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("alert-message"));
     }
 
 }

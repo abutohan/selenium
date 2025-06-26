@@ -2,6 +2,7 @@ package pages.filedownload;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class FileDownloadTest extends BaseTest {
 
     private FileDownloadPage fileDownloadPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("File Download");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         fileDownloadPage = homePage.clickFileDownloadPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = fileDownloadPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,14 +37,14 @@ public class FileDownloadTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Download Files", priority = 2)
-    public void testDownloadFileS() throws IOException, InterruptedException {
-        fileDownloadPage.downloadFiles("download-dir");
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.file-download.header");
+    @Test(testName = "Download Files", priority = 2, groups = {"regression"})
+    public void testDownloadFileS() throws IOException, InterruptedException {
+        fileDownloadPage.downloadFiles("download-dir");
     }
 
 }

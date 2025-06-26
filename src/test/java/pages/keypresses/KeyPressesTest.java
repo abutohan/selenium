@@ -3,6 +3,7 @@ package pages.keypresses;
 import base.BaseTest;
 import org.json.JSONObject;
 import org.openqa.selenium.Keys;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -20,17 +21,17 @@ public class KeyPressesTest extends BaseTest {
 
     private KeyPressesPage keyPressesPage;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("Key Presses");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         keyPressesPage = homePage.clickKeyPressesPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = keyPressesPage.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -38,7 +39,12 @@ public class KeyPressesTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Key Presses", priority = 2, dataProvider = "getKeyPress")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Key Presses", priority = 2, dataProvider = "getKeyPress", groups = {"regression"})
     public void testKeyPresses(JSONObject testData) {
         Iterator<String> keys = testData.keys();
         while (keys.hasNext()) {
@@ -52,14 +58,9 @@ public class KeyPressesTest extends BaseTest {
         }
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.key-presses.header");
-    }
-
     @DataProvider(name = "getKeyPress")
-    private Object[][] getKeyPress() throws IOException {
-        return getTestDataFromJSON("test-data.key-presses.key-presses");
+    private Object[][] getKeyPress(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("key-presses"));
     }
 
 }

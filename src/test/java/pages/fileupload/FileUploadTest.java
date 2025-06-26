@@ -2,6 +2,7 @@ package pages.fileupload;
 
 import base.BaseTest;
 import org.json.JSONObject;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -18,17 +19,17 @@ public class FileUploadTest extends BaseTest {
 
     private FileUploadPage fileUploadTest;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void initTest() {
         test = extent.createTest("File Upload");
     }
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void initPage() {
         fileUploadTest = homePage.clickFileUploadPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle")
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
     public void testHeaderTitle(JSONObject testData) {
         String actualHeaderTitle = fileUploadTest.getHeaderTitle();
         String expectedHeaderTitle = testData.getString("header_title");
@@ -36,7 +37,12 @@ public class FileUploadTest extends BaseTest {
                 onFailure(expectedHeaderTitle, actualHeaderTitle));
     }
 
-    @Test(testName = "Upload File", priority = 2, dataProvider = "getFilesData")
+    @DataProvider(name = "getHeaderTitle")
+    private Object[][] getHeaderTitle(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("header"));
+    }
+
+    @Test(testName = "Upload File", priority = 2, dataProvider = "getFilesData", groups = {"regression"})
     public void testUploadFile(JSONObject testData) {
         fileUploadTest.uploadFile(testData.getString("directory"), testData.getString("file_name"));
         String actualUploadedFile = fileUploadTest.getUploadedFile();
@@ -45,14 +51,9 @@ public class FileUploadTest extends BaseTest {
                 onFailure(expectedUploadedFile, actualUploadedFile));
     }
 
-    @DataProvider(name = "getHeaderTitle")
-    private Object[][] getHeaderTitle() throws IOException {
-        return getTestDataFromJSON("test-data.file-uploader.header");
-    }
-
     @DataProvider(name = "getFilesData")
-    private Object[][] getFilesData() throws IOException {
-        return getTestDataFromJSON("test-data.file-uploader.files");
+    private Object[][] getFilesData(ITestContext context) throws IOException {
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("files"));
     }
 
 }
