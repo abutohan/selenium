@@ -17,20 +17,15 @@ import static utils.Messages.onPropertyNotFound;
 import static utils.ReadProperties.loadProperty;
 
 public class Edge implements Browser {
+
     private final String headless;
 
     public Edge(String headless) {
         this.headless = headless;
     }
 
-
     @Override
     public WebDriver getBrowser() throws IOException {
-        // WebDriverManager (recommended) or System.setProperty for driver executable
-        // If you are using WebDriverManager, you won't need the setProperty line.
-        // For example: WebDriverManager.edgedriver().setup();
-        // System.setProperty("webdriver.edge.driver", "src/test/resources/browserBinaries/msedgedriver.exe"); // If not using WebDriverManager
-
         return new EdgeDriver(getEdgeOptions());
     }
 
@@ -42,6 +37,7 @@ public class Edge implements Browser {
      * @throws IOException              If an I/O error occurs while resolving the download path.
      * @throws IllegalArgumentException If the 'download-dir' property is not found or is blank.
      */
+
     private EdgeOptions getEdgeOptions() throws IOException {
         EdgeOptions options = new EdgeOptions();
 
@@ -60,9 +56,9 @@ public class Edge implements Browser {
         prefs.put("download.default_directory", absoluteDownloadPath);
         prefs.put("download.prompt_for_download", false);
         prefs.put("download.directory_upgrade", true);
-        prefs.put("safeBrowse.enabled", true); // Still applicable for Chromium-based browsers
+        prefs.put("safeBrowse.enabled", true);
 
-        // Password manager preferences (also applicable for Chromium-based browsers)
+        // Password manager preferences
         prefs.put("profile.password_manager_leak_detection", false);
 
         // --- Logging Preferences ---

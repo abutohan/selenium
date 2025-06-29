@@ -28,9 +28,8 @@ import static utils.Screenshot.captureScreenshot;
 
 public class BaseTest {
 
-    //    protected final static Chrome chrome = new Chrome();
     protected final static BrowserGetter browserGetter = new BrowserGetter();
-    //    protected WebDriver driver;
+
     protected static WebDriver driver;
     protected static ExtentReportManager extentReportManager;
     protected static ExtentReports extent;
@@ -40,7 +39,7 @@ public class BaseTest {
 
     @BeforeSuite(alwaysRun = true)
     @Parameters("browser")
-    public void setUpReporter(String browser) throws IOException {
+    public void setUpReporter(@Optional("chrome") String browser) throws IOException {
         String timestamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(new Date());
         screenshotFolder = REPORT_FILE_NAME + " - " + browser + " - " + timestamp;
         extentReportManager = new ExtentReportManager();
@@ -50,9 +49,7 @@ public class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"browser", "headless"})
-    public void setUpBrowser(String browser, @Optional("false") String headless) throws IOException {
-
-//        WebDriver originalDriver = new ChromeDriver(getChromeOptions());
+    public void setUpBrowser(@Optional("chrome") String browser, @Optional("false") String headless) throws IOException {
 
         WebDriver originalDriver = browserGetter.getBrowser(browser, headless);
 
