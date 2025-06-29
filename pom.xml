@@ -62,19 +62,24 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>11</source> <target>11</target> </configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version> <configuration>
-                <suiteXmlFiles>
-                    <suiteXmlFile>the-internet-regression-chrome.xml</suiteXmlFile>
-                </suiteXmlFiles>
-            </configuration>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <forkCount>2</forkCount>
+                    <reuseForks>false</reuseForks>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>the-internet-regression-chrome.xml</suiteXmlFile>
+                        <suiteXmlFile>the-internet-regression-edge.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 
 </project>

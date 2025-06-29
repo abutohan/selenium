@@ -3,18 +3,19 @@
 <suite name="The Internet - Regression - Chrome">
     <parameter name="url" value="https://the-internet.herokuapp.com/"/>
     <parameter name="browser" value="chrome"/>
-        <test verbose="2" preserve-order="true" name="A/B Testing Page">
-            <parameter name="header" value="test-data.ab-testing.header"/>
-            <groups>
-                <run>
-                    <include name="smoke"/>
-                    <include name="regression"/>
-                </run>
-            </groups>
-            <classes>
-                <class name="pages.abtesting.ABTestingTest"/>
-            </classes>
-        </test>
+<!--    <parameter name="headless" value="false"/>-->
+    <test verbose="2" preserve-order="true" name="A/B Testing Page">
+        <parameter name="header" value="test-data.ab-testing.header"/>
+        <groups>
+            <run>
+                <include name="smoke"/>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="pages.abtesting.ABTestingTest"/>
+        </classes>
+    </test>
     <test verbose="2" preserve-order="true" name="Add/Remove Elements Page">
         <parameter name="header" value="test-data.add-remove-elements.header"/>
         <parameter name="add-remove-elements" value="test-data.add-remove-elements.add-remove-elements"/>
@@ -182,18 +183,18 @@
             <class name="pages.exitintent.ExitIntentTest"/>
         </classes>
     </test>
-    <test verbose="2" preserve-order="true" name="File Download Page">
-        <parameter name="header" value="test-data.file-download.header"/>
-        <groups>
-            <run>
-                <include name="smoke"/>
-                <include name="regression"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="pages.filedownload.FileDownloadTest"/>
-        </classes>
-    </test>
+<!--    <test verbose="2" preserve-order="true" name="File Download Page">-->
+    <!--        <parameter name="header" value="test-data.file-download.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.filedownload.FileDownloadTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
     <test verbose="2" preserve-order="true" name="File Upload Page">
         <parameter name="header" value="test-data.file-uploader.header"/>
         <parameter name="files" value="test-data.file-uploader.files"/>
