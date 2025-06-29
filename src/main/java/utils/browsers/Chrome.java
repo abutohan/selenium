@@ -17,6 +17,12 @@ import static utils.ReadProperties.loadProperty;
 
 public class Chrome implements Browser {
 
+    private final String headless;
+
+    public Chrome(String headless) {
+        this.headless = headless;
+    }
+
     @Override
     public WebDriver getBrowser() throws IOException {
 //        setProperty("webdriver.chrome.driver", "src/test/resources/browserBinaries/chromedriver.exe");
@@ -43,6 +49,7 @@ public class Chrome implements Browser {
         prefs.put("profile.password_manager_leak_detection", false);
 
         //options
+        if(headless.equals("true")) options.addArguments("--headless");
         //options.addArguments("--incognito");
         options.setCapability("goog:loggingPrefs", logPrefs);
         options.setExperimentalOption("prefs", prefs);

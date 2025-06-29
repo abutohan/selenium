@@ -16,9 +16,9 @@ public class ExtentReportManager {
 
     private ExtentReports extent;
 
-    public void setUpReporter(String timestamp) throws IOException {
+    public void setUpReporter(String timestamp, String browser) throws IOException {
 
-        String reportFileName = REPORT_FILE_NAME + " - " + timestamp + REPORT_FILE_EXTENSION;
+        String reportFileName = REPORT_FILE_NAME + " - " + browser + " - " + timestamp + REPORT_FILE_EXTENSION;
 
         String relativeReportPath = loadProperty().getProperty(REPORT_DIR_PROPERTY);
         if (relativeReportPath == null || relativeReportPath.isBlank()) {

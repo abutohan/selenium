@@ -17,6 +17,11 @@ import static utils.Messages.onPropertyNotFound;
 import static utils.ReadProperties.loadProperty;
 
 public class Edge implements Browser {
+    private final String headless;
+
+    public Edge(String headless) {
+        this.headless = headless;
+    }
 
 
     @Override
@@ -78,7 +83,7 @@ public class Edge implements Browser {
         // Additional Edge-specific arguments/options can be added here
         // options.addArguments("--inprivate"); // Edge's equivalent of incognito
         // options.addArguments("--start-maximized"); // Maximize window on start
-        // options.addArguments("--headless"); // For running in headless mode
+        if (headless.equals("true")) options.addArguments("--headless"); // For running in headless mode
 
         return options;
     }

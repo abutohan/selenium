@@ -5,13 +5,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.logging.LogType;
-import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import org.testng.annotations.Optional;
 import pages.HomePage;
 import utils.CustomEventListener;
 import utils.ExtentReportManager;
@@ -19,15 +15,14 @@ import utils.WindowManager;
 import utils.browsers.BrowserGetter;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Level;
+import java.util.Date;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static utils.Constants.*;
-import static utils.ReadProperties.loadProperty;
+import static utils.Constants.REPORT_FILE_NAME;
+import static utils.Constants.TIMESTAMP_FORMAT;
 import static utils.Screenshot.captureScreenshot;
 
 
@@ -35,7 +30,7 @@ public class BaseTest {
 
     //    protected final static Chrome chrome = new Chrome();
     protected final static BrowserGetter browserGetter = new BrowserGetter();
-//    protected WebDriver driver;
+    //    protected WebDriver driver;
     protected static WebDriver driver;
     protected static ExtentReportManager extentReportManager;
     protected static ExtentReports extent;
@@ -44,21 +39,22 @@ public class BaseTest {
     protected HomePage homePage;
 
     @BeforeSuite(alwaysRun = true)
-    public void setUpReporter() throws IOException {
+    @Parameters("browser")
+    public void setUpReporter(String browser) throws IOException {
         String timestamp = new SimpleDateFormat(TIMESTAMP_FORMAT).format(new Date());
-        screenshotFolder = REPORT_FILE_NAME + timestamp;
+        screenshotFolder = REPORT_FILE_NAME + " - " + browser + " - " + timestamp;
         extentReportManager = new ExtentReportManager();
-        extentReportManager.setUpReporter(timestamp);
+        extentReportManager.setUpReporter(timestamp, browser);
         extent = extentReportManager.getExtentReports();
     }
 
     @BeforeClass(alwaysRun = true)
-    @Parameters("browser")
-    public void setUpBrowser(String browser) throws IOException {
+    @Parameters({"browser", "headless"})
+    public void setUpBrowser(String browser, @Optional("false") String headless) throws IOException {
 
 //        WebDriver originalDriver = new ChromeDriver(getChromeOptions());
 
-        WebDriver originalDriver = browserGetter.getBrowser(browser);
+        WebDriver originalDriver = browserGetter.getBrowser(browser, headless);
 
         System.out.println("Opening Browser");
         CustomEventListener customEventListener = new CustomEventListener();
