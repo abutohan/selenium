@@ -29,7 +29,7 @@ public class ABTestingTest extends BaseTest {
         abTestingPage = homePage.clickABTestingPage();
     }
 
-    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke"})
+    @Test(testName = "Page is Displayed", priority = 1, dataProvider = "getHeaderTitle", groups = {"smoke", "regression"})
     public void testABTesting(JSONObject testData) {
         assertThat(abTestingPage.getHeaderTitle(), containsString(testData.getString("header_title")));
     }

@@ -3,7 +3,7 @@
 <suite name="The Internet - Regression - Chrome">
     <parameter name="url" value="https://the-internet.herokuapp.com/"/>
     <parameter name="browser" value="edge"/>
-<!--    <parameter name="headless" value="false"/>-->
+    <parameter name="headless" value="false"/>
     <test verbose="2" preserve-order="true" name="A/B Testing Page">
         <parameter name="header" value="test-data.ab-testing.header"/>
         <groups>
