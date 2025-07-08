@@ -23,9 +23,6 @@ public class JavaScriptOnLoadEventErrorPage extends BasePage {
             if (entry.getMessage().contains("/javascript_error")) {
                 System.err.println(entry.getLevel() + " " + entry.getMessage());
                 errorFound = true;
-
-//            if (entry.getLevel().equals(Level.SEVERE) && entry.getMessage().contains("Simulated JavaScript error during onload!")) {
-//                errorFound = true;
             }
         }
         System.out.println("----------------------------");

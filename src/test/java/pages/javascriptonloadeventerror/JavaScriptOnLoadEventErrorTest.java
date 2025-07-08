@@ -28,7 +28,7 @@ public class JavaScriptOnLoadEventErrorTest extends BaseTest {
         javaScriptOnLoadEventErrorPage = homePage.clickJavaScriptOnLoadEventErrorPage();
     }
 
-    @Test(testName = "Browser Logs", priority = 1, dataProvider = "getOnloadEventStatus", groups = {"regression"})
+    @Test(testName = "Browser Logs", priority = 1, dataProvider = "getOnloadEventStatus", groups = {"smoke", "regression"})
     public void testBrowserLogs(JSONObject testData) {
         assertEquals(javaScriptOnLoadEventErrorPage.onError(), testData.getBoolean("onload_event_status"));
     }

@@ -71,7 +71,7 @@ public class DynamicLoadingTest extends BaseTest {
 
     @DataProvider(name = "getExampleTwoMessageData")
     private Object[][] getExampleTwoMessageData(ITestContext context) throws IOException {
-        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("example-one"));
+        return getTestDataFromJSON(context.getCurrentXmlTest().getParameter("example-two"));
     }
 
 }
