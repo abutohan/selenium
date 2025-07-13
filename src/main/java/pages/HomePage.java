@@ -174,4 +174,9 @@ public class HomePage extends BasePage {
         clickAnchorLink("Status Codes");
         return new StatusCodesPage(getDriver());
     }
+
+    public WysiwygEditorPage clickWysiwygEditorPage(){
+        clickAnchorLink("WYSIWYG Editor");
+        return new WysiwygEditorPage(getDriver());
+    }
 }
