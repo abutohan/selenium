@@ -4,422 +4,421 @@
     <parameter name="url" value="https://the-internet.herokuapp.com/"/>
     <parameter name="browser" value="chrome"/>
     <parameter name="headless" value="true"/>
-<!--    <test verbose="2" preserve-order="true" name="A/B Testing Page">-->
-<!--        <parameter name="header" value="test-data.ab-testing.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.abtesting.ABTestingTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Add/Remove Elements Page">-->
-<!--        <parameter name="header" value="test-data.add-remove-elements.header"/>-->
-<!--        <parameter name="add-remove-elements" value="test-data.add-remove-elements.add-remove-elements"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.addremoveelements.AddRemoveElementsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Basic Auth Page">-->
-<!--        <parameter name="header" value="test-data.basic-auth.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.basicauth.BasicAuthTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Broken Images Page">-->
-<!--        <parameter name="header" value="test-data.broken-images.header"/>-->
-<!--        <parameter name="images-loaded-status" value="test-data.broken-images.images-loaded-status"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.brokenimages.BrokenImagesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Checkboxes Page">-->
-<!--        <parameter name="header" value="test-data.checkboxes.header"/>-->
-<!--        <parameter name="checkboxes" value="test-data.checkboxes.checkboxes"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.checkboxes.CheckboxesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Context Menu Page">-->
-<!--        <parameter name="header" value="test-data.context-menu.header"/>-->
-<!--        <parameter name="alert-message" value="test-data.context-menu.alert-message"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.contextmenu.ContextMenuTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Digest Authentication Page">-->
-<!--        <parameter name="header" value="test-data.digest-authentication.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.digestauthentication.DigestAuthenticationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Disappearing Elements Page">-->
-<!--        <parameter name="header" value="test-data.disappearing-elements.header"/>-->
-<!--        <parameter name="elements" value="test-data.disappearing-elements.elements"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.disappearingelements.DisappearingElementsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Drag and Drop Page">-->
-<!--        <parameter name="header" value="test-data.drag-and-drop.header"/>-->
-<!--        <parameter name="box-header" value="test-data.drag-and-drop.box-header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.draganddrop.DragAndDropTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Drop Down Test">-->
-<!--        <parameter name="header" value="test-data.dropdown.header"/>-->
-<!--        <parameter name="options" value="test-data.dropdown.options"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.dropdownlist.DropdownTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Dynamic Controls Page">-->
-<!--        <parameter name="header" value="test-data.dynamic-controls.header"/>-->
-<!--        <parameter name="messages" value="test-data.dynamic-controls.messages"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.dynamiccontrols.DynamicControlsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Dynamic Loading Page">-->
-<!--        <parameter name="header" value="test-data.dynamic-loading.header"/>-->
-<!--        <parameter name="example-one" value="test-data.dynamic-loading.example-one"/>-->
-<!--        <parameter name="example-two" value="test-data.dynamic-loading.example-two"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.dynamicloading.DynamicLoadingTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Entry Ad Page">-->
-<!--        <parameter name="header" value="test-data.entry-ad.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.entryad.EntryAdTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Exit Intent Page">-->
-<!--        <parameter name="header" value="test-data.exit-intent.header"/>-->
-<!--        <parameter name="modal-presence-status" value="test-data.exit-intent.modal-presence-status"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.exitintent.ExitIntentTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--&lt;!&ndash;    <test verbose="2" preserve-order="true" name="File Download Page">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <parameter name="header" value="test-data.file-download.header"/>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <groups>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <run>&ndash;&gt;-->
-<!--    &lt;!&ndash;                <include name="smoke"/>&ndash;&gt;-->
-<!--    &lt;!&ndash;                <include name="regression"/>&ndash;&gt;-->
-<!--    &lt;!&ndash;            </run>&ndash;&gt;-->
-<!--    &lt;!&ndash;        </groups>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <classes>&ndash;&gt;-->
-<!--    &lt;!&ndash;            <class name="pages.filedownload.FileDownloadTest"/>&ndash;&gt;-->
-<!--    &lt;!&ndash;        </classes>&ndash;&gt;-->
-<!--    &lt;!&ndash;    </test>&ndash;&gt;-->
-<!--    <test verbose="2" preserve-order="true" name="File Upload Page">-->
-<!--        <parameter name="header" value="test-data.file-uploader.header"/>-->
-<!--        <parameter name="files" value="test-data.file-uploader.files"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.fileupload.FileUploadTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Floating Menu Page">-->
-<!--        <parameter name="header" value="test-data.floating-menu.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.floatingmenu.FloatingMenuTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Forgot Password Page">-->
-<!--        <parameter name="header" value="test-data.forgot-password.header"/>-->
-<!--        <parameter name="emails" value="test-data.forgot-password.emails"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.forgotpassword.ForgotPasswordTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Form Authentication Page">-->
-<!--        <parameter name="header" value="test-data.form-authentication.header"/>-->
-<!--        <parameter name="users" value="test-data.form-authentication.users"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.formauthentication.FormAuthenticationTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Frames Page">-->
-<!--        <parameter name="header" value="test-data.frames.header"/>-->
-<!--        <parameter name="nested" value="test-data.frames.nested"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.frames.FramesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Horizontal Slider Page">-->
-<!--        <parameter name="header" value="test-data.horizontal-slider.header"/>-->
-<!--        <parameter name="slider-value" value="test-data.horizontal-slider.slider-value"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.horizontalslider.HorizontalSliderTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Hovers Page">-->
-<!--        <parameter name="header" value="test-data.hovers.header"/>-->
-<!--        <parameter name="hovers" value="test-data.hovers.hovers"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.hovers.HoversTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Infinite Scroll Page">-->
-<!--        <parameter name="header" value="test-data.infinite-scroll.header"/>-->
-<!--        <parameter name="scroll-index" value="test-data.infinite-scroll.scroll-index"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.infinitescroll.InfiniteScrollTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Input Page">-->
-<!--        <parameter name="header" value="test-data.inputs.header"/>-->
-<!--        <parameter name="inputs" value="test-data.inputs.inputs"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.inputs.InputsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="JavaScript Alerts Page">-->
-<!--        <parameter name="header" value="test-data.javascript-alerts.header"/>-->
-<!--        <parameter name="alert" value="test-data.javascript-alerts.alert"/>-->
-<!--        <parameter name="confirm-ok" value="test-data.javascript-alerts.confirm-ok"/>-->
-<!--        <parameter name="confirm-cancel" value="test-data.javascript-alerts.confirm-cancel"/>-->
-<!--        <parameter name="prompt" value="test-data.javascript-alerts.prompt"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.javascriptalerts.JavaScriptAlertsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="JavaScript On Load Event Error Page">-->
-<!--        <parameter name="onload-event-error" value="test-data.javascript-onload-event-error"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.javascriptonloadeventerror.JavaScriptOnLoadEventErrorTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Key Presses Page">-->
-<!--        <parameter name="header" value="test-data.key-presses.header"/>-->
-<!--        <parameter name="key-presses" value="test-data.key-presses.key-presses"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.keypresses.KeyPressesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Large and Deep DOM Page">-->
-<!--        <parameter name="header" value="test-data.large-and-deep-dom.header"/>-->
-<!--        <parameter name="long-list" value="test-data.large-and-deep-dom.long-list"/>-->
-<!--        <parameter name="wide-table" value="test-data.large-and-deep-dom.wide-table"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.largeanddeepdom.LargeAndDeepDOMTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Multiple Windows Page">-->
-<!--        <parameter name="header" value="test-data.multiple-windows.header"/>-->
-<!--        <parameter name="new-window" value="test-data.multiple-windows.new-window"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.multiplewindows.MultipleWindowsTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Notification Message Page">-->
-<!--        <parameter name="header" value="test-data.notification-messages.header"/>-->
-<!--        <parameter name="message" value="test-data.notification-messages.message"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.notificationmessages.NotificationMessagesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Secure Download Page">-->
-<!--        <parameter name="header" value="test-data.secure-file-download.header"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.securefiledownload.SecureFileDownloadTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-<!--    <test verbose="2" preserve-order="true" name="Status Codes Page">-->
-<!--        <parameter name="header" value="test-data.status-codes.header"/>-->
-<!--        <parameter name="status-codes" value="test-data.status-codes.status-codes"/>-->
-<!--        <groups>-->
-<!--            <run>-->
-<!--                <include name="smoke"/>-->
-<!--                <include name="regression"/>-->
-<!--            </run>-->
-<!--        </groups>-->
-<!--        <classes>-->
-<!--            <class name="pages.statuscodes.StatusCodesTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
-    <test verbose="2" preserve-order="true" name="Wysiwyg Editor Page">
-        <parameter name="header" value="test-data.wysiwyg-editor.header"/>
-        <parameter name="editor-text" value="test-data.wysiwyg-editor.editor-text"/>
+    <!--    <test verbose="2" preserve-order="true" name="A/B Testing Page">-->
+    <!--        <parameter name="header" value="test-data.ab-testing.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.abtesting.ABTestingTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Add/Remove Elements Page">-->
+    <!--        <parameter name="header" value="test-data.add-remove-elements.header"/>-->
+    <!--        <parameter name="add-remove-elements" value="test-data.add-remove-elements.add-remove-elements"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.addremoveelements.AddRemoveElementsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Basic Auth Page">-->
+    <!--        <parameter name="header" value="test-data.basic-auth.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.basicauth.BasicAuthTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Broken Images Page">-->
+    <!--        <parameter name="header" value="test-data.broken-images.header"/>-->
+    <!--        <parameter name="images-loaded-status" value="test-data.broken-images.images-loaded-status"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.brokenimages.BrokenImagesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Checkboxes Page">-->
+    <!--        <parameter name="header" value="test-data.checkboxes.header"/>-->
+    <!--        <parameter name="checkboxes" value="test-data.checkboxes.checkboxes"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.checkboxes.CheckboxesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Context Menu Page">-->
+    <!--        <parameter name="header" value="test-data.context-menu.header"/>-->
+    <!--        <parameter name="alert-message" value="test-data.context-menu.alert-message"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.contextmenu.ContextMenuTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Digest Authentication Page">-->
+    <!--        <parameter name="header" value="test-data.digest-authentication.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.digestauthentication.DigestAuthenticationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Disappearing Elements Page">-->
+    <!--        <parameter name="header" value="test-data.disappearing-elements.header"/>-->
+    <!--        <parameter name="elements" value="test-data.disappearing-elements.elements"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.disappearingelements.DisappearingElementsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Drag and Drop Page">-->
+    <!--        <parameter name="header" value="test-data.drag-and-drop.header"/>-->
+    <!--        <parameter name="box-header" value="test-data.drag-and-drop.box-header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.draganddrop.DragAndDropTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Drop Down Test">-->
+    <!--        <parameter name="header" value="test-data.dropdown.header"/>-->
+    <!--        <parameter name="options" value="test-data.dropdown.options"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.dropdownlist.DropdownTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Dynamic Controls Page">-->
+    <!--        <parameter name="header" value="test-data.dynamic-controls.header"/>-->
+    <!--        <parameter name="messages" value="test-data.dynamic-controls.messages"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.dynamiccontrols.DynamicControlsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Dynamic Loading Page">-->
+    <!--        <parameter name="header" value="test-data.dynamic-loading.header"/>-->
+    <!--        <parameter name="example-one" value="test-data.dynamic-loading.example-one"/>-->
+    <!--        <parameter name="example-two" value="test-data.dynamic-loading.example-two"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.dynamicloading.DynamicLoadingTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Entry Ad Page">-->
+    <!--        <parameter name="header" value="test-data.entry-ad.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.entryad.EntryAdTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Exit Intent Page">-->
+    <!--        <parameter name="header" value="test-data.exit-intent.header"/>-->
+    <!--        <parameter name="modal-presence-status" value="test-data.exit-intent.modal-presence-status"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.exitintent.ExitIntentTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--&lt;!&ndash;    <test verbose="2" preserve-order="true" name="File Download Page">&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <parameter name="header" value="test-data.file-download.header"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <groups>&ndash;&gt;-->
+    <!--    &lt;!&ndash;            <run>&ndash;&gt;-->
+    <!--    &lt;!&ndash;                <include name="smoke"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;                <include name="regression"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;            </run>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        </groups>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        <classes>&ndash;&gt;-->
+    <!--    &lt;!&ndash;            <class name="pages.filedownload.FileDownloadTest"/>&ndash;&gt;-->
+    <!--    &lt;!&ndash;        </classes>&ndash;&gt;-->
+    <!--    &lt;!&ndash;    </test>&ndash;&gt;-->
+    <!--    <test verbose="2" preserve-order="true" name="File Upload Page">-->
+    <!--        <parameter name="header" value="test-data.file-uploader.header"/>-->
+    <!--        <parameter name="files" value="test-data.file-uploader.files"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.fileupload.FileUploadTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Floating Menu Page">-->
+    <!--        <parameter name="header" value="test-data.floating-menu.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.floatingmenu.FloatingMenuTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Forgot Password Page">-->
+    <!--        <parameter name="header" value="test-data.forgot-password.header"/>-->
+    <!--        <parameter name="emails" value="test-data.forgot-password.emails"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.forgotpassword.ForgotPasswordTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Form Authentication Page">-->
+    <!--        <parameter name="header" value="test-data.form-authentication.header"/>-->
+    <!--        <parameter name="users" value="test-data.form-authentication.users"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.formauthentication.FormAuthenticationTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Frames Page">-->
+    <!--        <parameter name="header" value="test-data.frames.header"/>-->
+    <!--        <parameter name="nested" value="test-data.frames.nested"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.frames.FramesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Horizontal Slider Page">-->
+    <!--        <parameter name="header" value="test-data.horizontal-slider.header"/>-->
+    <!--        <parameter name="slider-value" value="test-data.horizontal-slider.slider-value"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.horizontalslider.HorizontalSliderTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Hovers Page">-->
+    <!--        <parameter name="header" value="test-data.hovers.header"/>-->
+    <!--        <parameter name="hovers" value="test-data.hovers.hovers"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.hovers.HoversTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Infinite Scroll Page">-->
+    <!--        <parameter name="header" value="test-data.infinite-scroll.header"/>-->
+    <!--        <parameter name="scroll-index" value="test-data.infinite-scroll.scroll-index"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.infinitescroll.InfiniteScrollTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Input Page">-->
+    <!--        <parameter name="header" value="test-data.inputs.header"/>-->
+    <!--        <parameter name="inputs" value="test-data.inputs.inputs"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.inputs.InputsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="JavaScript Alerts Page">-->
+    <!--        <parameter name="header" value="test-data.javascript-alerts.header"/>-->
+    <!--        <parameter name="alert" value="test-data.javascript-alerts.alert"/>-->
+    <!--        <parameter name="confirm-ok" value="test-data.javascript-alerts.confirm-ok"/>-->
+    <!--        <parameter name="confirm-cancel" value="test-data.javascript-alerts.confirm-cancel"/>-->
+    <!--        <parameter name="prompt" value="test-data.javascript-alerts.prompt"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.javascriptalerts.JavaScriptAlertsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="JavaScript On Load Event Error Page">-->
+    <!--        <parameter name="onload-event-error" value="test-data.javascript-onload-event-error"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.javascriptonloadeventerror.JavaScriptOnLoadEventErrorTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Key Presses Page">-->
+    <!--        <parameter name="header" value="test-data.key-presses.header"/>-->
+    <!--        <parameter name="key-presses" value="test-data.key-presses.key-presses"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.keypresses.KeyPressesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Large and Deep DOM Page">-->
+    <!--        <parameter name="header" value="test-data.large-and-deep-dom.header"/>-->
+    <!--        <parameter name="long-list" value="test-data.large-and-deep-dom.long-list"/>-->
+    <!--        <parameter name="wide-table" value="test-data.large-and-deep-dom.wide-table"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.largeanddeepdom.LargeAndDeepDOMTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Multiple Windows Page">-->
+    <!--        <parameter name="header" value="test-data.multiple-windows.header"/>-->
+    <!--        <parameter name="new-window" value="test-data.multiple-windows.new-window"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.multiplewindows.MultipleWindowsTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Notification Message Page">-->
+    <!--        <parameter name="header" value="test-data.notification-messages.header"/>-->
+    <!--        <parameter name="message" value="test-data.notification-messages.message"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.notificationmessages.NotificationMessagesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Secure Download Page">-->
+    <!--        <parameter name="header" value="test-data.secure-file-download.header"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.securefiledownload.SecureFileDownloadTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <!--    <test verbose="2" preserve-order="true" name="Status Codes Page">-->
+    <!--        <parameter name="header" value="test-data.status-codes.header"/>-->
+    <!--        <parameter name="status-codes" value="test-data.status-codes.status-codes"/>-->
+    <!--        <groups>-->
+    <!--            <run>-->
+    <!--                <include name="smoke"/>-->
+    <!--                <include name="regression"/>-->
+    <!--            </run>-->
+    <!--        </groups>-->
+    <!--        <classes>-->
+    <!--            <class name="pages.statuscodes.StatusCodesTest"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+    <test verbose="2" preserve-order="true" name="Typos Page">
+        <parameter name="header" value="test-data.typos.header"/>
         <groups>
             <run>
                 <include name="smoke"/>
@@ -427,7 +426,20 @@
             </run>
         </groups>
         <classes>
-            <class name="pages.wysiwygeditor.WysiwygEditorTest"/>
+            <class name="pages.typos.TyposTest"/>
         </classes>
     </test>
+<!--    <test verbose="2" preserve-order="true" name="Wysiwyg Editor Page">-->
+<!--        <parameter name="header" value="test-data.wysiwyg-editor.header"/>-->
+<!--        <parameter name="editor-text" value="test-data.wysiwyg-editor.editor-text"/>-->
+<!--        <groups>-->
+<!--            <run>-->
+<!--                <include name="smoke"/>-->
+<!--                <include name="regression"/>-->
+<!--            </run>-->
+<!--        </groups>-->
+<!--        <classes>-->
+<!--            <class name="pages.wysiwygeditor.WysiwygEditorTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

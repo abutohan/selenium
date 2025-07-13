@@ -175,6 +175,11 @@ public class HomePage extends BasePage {
         return new StatusCodesPage(getDriver());
     }
 
+    public TyposPage clickTyposPage(){
+        clickAnchorLink("Typos");
+        return new TyposPage(getDriver());
+    }
+
     public WysiwygEditorPage clickWysiwygEditorPage(){
         clickAnchorLink("WYSIWYG Editor");
         return new WysiwygEditorPage(getDriver());
